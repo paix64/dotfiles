@@ -24,9 +24,9 @@ export const BluetoothToggle = () => ArrowToggleButton({
 const DeviceItem = (device: BluetoothDevice) => Widget.Box({
     children: [
         Widget.Icon(device.icon_name + "-symbolic"),
-        Widget.Label(device.name),
+        Widget.Label(" " + device.name),
         Widget.Label({
-            label: `${device.battery_percentage}%`,
+            label: ` ${device.battery_percentage}%`,
             visible: device.bind("battery_percentage").as(p => p > 0),
         }),
         Widget.Box({ hexpand: true }),
@@ -46,7 +46,7 @@ const DeviceItem = (device: BluetoothDevice) => Widget.Box({
 
 export const BluetoothDevices = () => Menu({
     name: "bluetooth",
-    icon: icons.bluetooth.disabled,
+    icon: icons.bluetooth.enabled,
     title: "Bluetooth",
     content: [
         Widget.Box({

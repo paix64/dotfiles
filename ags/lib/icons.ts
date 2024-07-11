@@ -38,7 +38,7 @@ export default {
         settings: "emblem-system-symbolic",
         themes: "preferences-desktop-theme-symbolic",
         tick: "object-select-symbolic",
-        time: "hourglass-symbolic",
+        time: "preferences-system-time-symbolic",
         toolbars: "toolbars-symbolic",
         warning: "dialog-warning-symbolic",
         avatar: "avatar-default-symbolic",
