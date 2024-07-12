@@ -107,10 +107,13 @@ create_links() {
     else
         cp -r $HOME/dotfiles/wallpapers $HOME/Pictures/Wallpapers
     fi
+    
     ln -s $HOME/dotfiles/ags $HOME/.config/ags
     ln -s $HOME/dotfiles/alacritty $HOME/.config/kitty
     ln -s $HOME/dotfiles/hypr $HOME/.config/hypr
-    ln -s $HOME/dotfiles/swappy $HOME/.config/swappy
+    ln -s $HOME/dotfiles/fish $HOME/.config/fish
+    ln -s $HOME/dotfiles/fastfetch $HOME/.config/fastfetch
+    ln -s $HOME/dotfiles/localshare/zoxide $HOME/.local/share/
 }
 
 remove_gtk_buttons() {
