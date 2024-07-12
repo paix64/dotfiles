@@ -9,9 +9,11 @@ echo \
      ╚╝╚═══╝  ╚═╝     ╚═╝  ╚═╝╚═╝"
 end      
 
-alias ls="ls --color=auto --hyperlink=auto"
-alias la="ls -a --color=auto --hyperlink=auto"
-alias lal="ls -la --color=auto --hyperlink=auto"
+set EDITOR "/usr/bin/micro"
+
+alias ls="exa --color=auto --hyperlink --icons=auto"
+alias la="exa -a --color=auto --hyperlink --icons=auto"
+alias lal="exa -la --color=auto --hyperlink --icons=auto"
 
 alias cd..="cd .."
 alias ..="cd .."
@@ -30,11 +32,10 @@ alias gl="git log"
 alias gpu="git pull"
 alias gr="git restore"
 
-set EDITOR "/usr/bin/micro"
 alias m="micro"
-
 alias cat="bat"
 
+# !! functionality for sudo
 function sudo
     if test "$argv" = !!
         eval command sudo $history[1]
@@ -47,10 +48,14 @@ end
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
 
+# Set up zoxide as cd
 zoxide init --cmd cd fish | source
 
 # Set up fzf key bindings
 fzf --fish | source
+
+# Set the fuck up
+thefuck --alias | source
 
 if test "~/.bun/bin/oh-my-posh"
     echo ""
@@ -62,3 +67,4 @@ else
 end  
 
 oh-my-posh init fish -c ~/.config/oh-my-posh/zen.toml | source
+
