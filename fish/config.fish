@@ -47,3 +47,6 @@ set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
 
 zoxide init --cmd cd fish | source
+
+# Set up fzf key bindings
+fzf --fish | source
