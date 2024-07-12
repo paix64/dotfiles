@@ -1,12 +1,13 @@
 if status is-interactive
 echo \
-"     ██████╗  ██████╗  █████╗ ██╗
+"
+     ██████╗  ██████╗  █████╗ ██╗
     ██╔═══██╗ ██╔══██╗██╔══██╗██║
     ██║██╗██║ ██████╔╝███████║██║
     ██║██║██║ ██╔═══╝ ██╔══██║██║
     ╚█║████╔╝ ██║     ██║  ██║██║
      ╚╝╚═══╝  ╚═╝     ╚═╝  ╚═╝╚═╝"
-end
+end      
 
 alias ls="ls --color=auto --hyperlink=auto"
 alias la="ls -a --color=auto --hyperlink=auto"
@@ -29,7 +30,7 @@ alias gl="git log"
 alias gpu="git pull"
 alias gr="git restore"
 
-set EDITOR "usr/bin/micro"
+set EDITOR "/usr/bin/micro"
 alias m="micro"
 
 alias cat="bat"
@@ -50,3 +51,14 @@ zoxide init --cmd cd fish | source
 
 # Set up fzf key bindings
 fzf --fish | source
+
+if test "~/.bun/bin/oh-my-posh"
+    echo ""
+else
+    echo "Installing Oh My Posh"
+    mkdir -p "~/.bun/bin"
+    curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ~/.bun/bin
+    
+end  
+
+oh-my-posh init fish -c ~/.config/oh-my-posh/zen.toml | source

@@ -113,6 +113,7 @@ create_links() {
     ln -s $HOME/dotfiles/hypr $HOME/.config/hypr
     ln -s $HOME/dotfiles/fish $HOME/.config/fish
     ln -s $HOME/dotfiles/fastfetch $HOME/.config/fastfetch
+    ln -s $HOME/dotfiles/oh-my-posh $HOME/.config/oh-my-posh
     ln -s $HOME/dotfiles/localshare/zoxide $HOME/.local/share/
 }
 
