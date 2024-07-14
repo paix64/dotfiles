@@ -55,16 +55,8 @@ zoxide init --cmd cd fish | source
 fzf --fish | source
 
 # Set the fuck up
-thefuck --alias | source
+thefuck --alias | source  
 
-if test "~/.bun/bin/oh-my-posh"
-    echo ""
-else
-    echo "Installing Oh My Posh"
-    mkdir -p "~/.bun/bin"
-    curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ~/.bun/bin
-    
-end  
-
+# Set up oh-my-posh
 oh-my-posh init fish -c ~/.config/oh-my-posh/zen.toml | source
 
