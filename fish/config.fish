@@ -34,6 +34,7 @@ alias gr="git restore"
 
 alias m="micro"
 alias cat="bat"
+alias exe="chmod +x"
 
 # !! functionality for sudo
 function sudo
