@@ -4,7 +4,6 @@
 # Variables
 scriptsDir=$HOME/.config/hypr/scripts
 wallpaper=$HOME/.config/hypr/wallpaper_effects/.wallpaper_modified
-waybar_style="$HOME/.config/waybar/style/[Wallust] Box type.css"
 color_scheme="prefer-dark"
 gtk_theme="Andromeda-dark"
 icon_theme="Flat-Remix-Blue-Dark"
@@ -29,18 +28,5 @@ if [ ! -f ~/.config/hypr/.initial_startup_done ]; then
     gsettings set org.gnome.desktop.interface icon-theme $icon_theme > /dev/null 2>&1 &
     gsettings set org.gnome.desktop.interface cursor-theme $cursor_theme > /dev/null 2>&1 &
     gsettings set org.gnome.desktop.interface cursor-size 24 > /dev/null 2>&1 &
-    
 
-    # Initial waybar style
-	if [ -f "$waybar_style" ]; then
-    	ln -sf "$waybar_style" "$HOME/.config/waybar/style.css"
-
-		# Refreshing waybar, swaync, rofi etc. 
-		"$scriptsDir/Refresh.sh" > /dev/null 2>&1 & 
-	fi
-
-    # Create a marker file to indicate that the script has been executed.
-    touch ~/.config/hypr/.initial_startup_done
-
-    exit
 fi
