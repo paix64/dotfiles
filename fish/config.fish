@@ -45,6 +45,11 @@ function sudo
     end
 end
 
+# Set default apps
+xdg-mime default org.gnome.Nautilus.desktop inode/directory
+xdg-mime default firefox.desktop x-scheme-handler/https
+
+
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
