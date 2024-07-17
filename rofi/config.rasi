@@ -2,7 +2,7 @@
 
 configuration {
   modes: "drun";
-  font: "JetBrainsMono NF 20";
+  font: "Inter Variable 20";
   drun-display-format: "{name}";
 }
 
