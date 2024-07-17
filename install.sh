@@ -115,6 +115,7 @@ create_links() {
     ln -s $HOME/dotfiles/fastfetch $HOME/.config/fastfetch
     ln -s $HOME/dotfiles/oh-my-posh $HOME/.config/oh-my-posh
     ln -s $HOME/dotfiles/localshare/zoxide $HOME/.local/share/
+	ln -s $HOME/dotfiles/rofi $HOME/.config/
 }
 
 remove_gtk_buttons() {
