@@ -17,6 +17,7 @@ fi
 
 # Extract remaining capacity, status, and time remaining from acpi output
 remaining_capacity=$(echo "$battery_info" | awk '{print $4}' | tr -d '%,')
+remaining_capacity_plugged=$(echo $battery_info | grep -o '[0-9]\+%')
 status=$(echo "$battery_info" | awk '{print $3}' | tr -d ',')
 time_remaining=$(echo "$battery_info" | awk '{print $5}')
 current_power=$(echo "scale=2; $(cat /sys/class/power_supply/BAT0/power_now) / 1000000" | bc)
@@ -24,7 +25,7 @@ battery_health=$(echo $(acpi -i) | grep 'last full capacity' | awk -F'=' '{print
 
 # Check if the battery is discharging
 if [[ "$status" != "Discharging" ]]; then
-    echo "Battery is not discharging."
+    echo -e "\033[0;32m$remaining_capacity_plugged\033[0m [AC]"
     exit 0
 fi
 
