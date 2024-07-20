@@ -69,22 +69,24 @@ const options = mkOptions(OPTIONS, {
         transparent: opt(false),
         layout: {
             start: opt<Array<import("widget/bar/Bar").BarWidget>>([
-                "launcher",
                 "workspaces",
                 "taskbar",
+                "expander",
+                "media",
                 "expander",
             ]),
             center: opt<Array<import("widget/bar/Bar").BarWidget>>([
                 "date",
             ]),
             end: opt<Array<import("widget/bar/Bar").BarWidget>>([
-                "media",
                 "expander",
                 "systray",
                 "colorpicker",
                 "screenrecord",
                 "battery",
                 "system",
+                "launcher",
+
             ]),
         },
         launcher: {
