@@ -73,7 +73,6 @@ const options = mkOptions(OPTIONS, {
                 "workspaces",
                 "taskbar",
                 "expander",
-                "messages",
             ]),
             center: opt<Array<import("widget/bar/Bar").BarWidget>>([
                 "date",
@@ -84,9 +83,8 @@ const options = mkOptions(OPTIONS, {
                 "systray",
                 "colorpicker",
                 "screenrecord",
-                "system",
                 "battery",
-                "powermenu",
+                "system",
             ]),
         },
         launcher: {
