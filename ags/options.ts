@@ -98,7 +98,7 @@ const options = mkOptions(OPTIONS, {
                 colored: opt(false),
                 label: opt(" Applications"),
             },
-            action: opt(() => App.toggleWindow("launcher")),
+            action: opt(() => App.toggleWindow("powermenu")),
         },
         date: {
             format: opt("%H:%M - %A %e."),
