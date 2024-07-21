@@ -17,7 +17,7 @@ fi
 
 # Extract remaining capacity, status, and time remaining from acpi output
 remaining_capacity=$(echo "$battery_info" | awk '{print $4}' | tr -d '%,')
-remaining_capacity_plugged=$(echo $battery_info | grep -o '[0-9]\+%')
+remaining_capacity_plugged=$(echo $battery_info | grep -o '[0-9]\+%'| head -n 1)
 status=$(echo "$battery_info" | awk '{print $3}' | tr -d ',')
 time_remaining=$(echo "$battery_info" | awk '{print $5}')
 current_power=$(echo "scale=2; $(cat /sys/class/power_supply/BAT0/power_now) / 1000000" | bc)

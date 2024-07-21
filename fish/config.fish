@@ -1,12 +1,5 @@
 if status is-interactive
-echo \
-"
-     ██████╗  ██████╗  █████╗ ██╗
-    ██╔═══██╗ ██╔══██╗██╔══██╗██║
-    ██║██╗██║ ██████╔╝███████║██║
-    ██║██║██║ ██╔═══╝ ██╔══██║██║
-    ╚█║████╔╝ ██║     ██║  ██║██║
-     ╚╝╚═══╝  ╚═╝     ╚═╝  ╚═╝╚═╝"
+fastfetch
 end      
 
 set EDITOR "/usr/bin/micro"
@@ -24,8 +17,8 @@ alias .....="cd ../../../.."
 alias undopush="git push -f origin HEAD^:master"
 alias gs="git status"
 alias gd="git diff"
-alias ga="git add ."
-alias gac="git add .; git commit -m"
+alias ga="git add --all"
+alias gac="git add --all; git commit -m"
 alias gc="git commit -m"
 alias gp="git push"
 alias gl="git log"
