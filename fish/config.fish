@@ -42,6 +42,11 @@ end
 xdg-mime default org.gnome.Nautilus.desktop inode/directory
 xdg-mime default firefox.desktop x-scheme-handler/https
 
+# eval `ssh-agent -s`
+set SSH_AUTH_SOCK /tmp/ssh-XXXXXXCfQepT/agent.154459
+export SSH_AUTH_SOCK
+set SSH_AGENT_PID 154460
+export SSH_AGENT_PID
 
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
