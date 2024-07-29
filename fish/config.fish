@@ -7,6 +7,7 @@ set EDITOR "/usr/bin/micro"
 alias ls="exa --color=auto --hyperlink --icons=auto"
 alias la="exa -a --color=auto --hyperlink --icons=auto"
 alias lal="exa -la --color=auto --hyperlink --icons=auto"
+alias şs="ls"
 
 alias cd..="cd .."
 alias ..="cd .."
