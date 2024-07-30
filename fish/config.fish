@@ -1,6 +1,6 @@
 if status is-interactive
 fastfetch
-end      
+end
 
 set EDITOR "/usr/bin/micro"
 
@@ -52,9 +52,6 @@ zoxide init --cmd cd fish | source
 
 # Set up fzf key bindings
 fzf --fish | source
-
-# Set the fuck up
-thefuck --alias | source  
 
 # Set up oh-my-posh
 oh-my-posh init fish -c ~/.config/oh-my-posh/zen.toml | source
