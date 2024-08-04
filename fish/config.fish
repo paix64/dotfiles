@@ -2,7 +2,7 @@ if status is-interactive
 fastfetch
 end
 
-set EDITOR "/usr/bin/micro"
+set EDITOR "/usr/bin/nvim"
 
 alias ls="exa --color=auto --hyperlink --icons=auto"
 alias la="exa -a --color=auto --hyperlink --icons=auto"
@@ -27,6 +27,7 @@ alias gpu="git pull"
 alias gr="git restore"
 
 alias m="micro"
+alias n="nvim"
 alias cat="bat"
 alias exe="chmod +x"
 

@@ -3,74 +3,74 @@
   "logo": {
     "padding": {
       "top": 4,
-      "left": 4,
+      "left": 4
     },
-    "type": "small",
+    "type": "small"
   },
   "display": {
-    "separator": " ",
+    "separator": " "
   },
   "modules": [
     "break",
     "break",    
     {
       "type": "custom",
-      "format": "  ╭────────────────────────────────────╮",
+      "format": "  ╭────────────────────────────────────╮"
     },
     {
       "type": "kernel",
       "key": "kernel ",
-      "format": "{1} {2}.{4}",
-      "keyColor": "white",
+      "format": "{1} {2}",
+      "keyColor": "white"
     },
     {
       "type": "packages",
       "key": "packages ",
-      "keyColor": "cyan",
+      "keyColor": "cyan"
     },
     {
       "type": "uptime",
       "key": "uptime ",
-      "keyColor": "magenta",
+      "keyColor": "magenta"
     },
     {
       "type": "cpu",
-      "format": "Intel i7-12700H @ {7}GHz {8}",
+      "format": "Intel i7-12700H @ {7} {8}",
       "key": "cpu ",
       "keyColor": "red",
-      "temp": true,
+      "temp": true
     },
     {
       "type": "memory",
       "key": "ram ",
-      "keyColor": "yellow",
+      "keyColor": "yellow"
     },
     {
       "type": "disk",
       "key": "storage ",
       "format": "{1} / {2} ({3})",
-      "keyColor": "blue",
+      "keyColor": "blue"
     },
     {
       "type": "dns",
       "key": "dns ",
-      "keyColor": "cyan",
+      "keyColor": "cyan"
     },
     {
       "type": "command",
       "shell": "/bin/bash",
       "text": "/home/burak/dotfiles/scripts/battery_info.sh",
       "key": "power ",
-      "keyColor": "green",
+      "keyColor": "green"
     },
     {
       "type": "custom",
-      "format": "  ╰────────────────────────────────────╯",
+      "format": "  ╰────────────────────────────────────╯"
     },
     {
       "type": "custom",
-      "format": "          \u001b[31m  \u001b[32m  \u001b[33m  \u001b[34m  \u001b[35m  \u001b[36m  \u001b[37m  \u001b[90m ",
+      "format": "          \u001b[31m  \u001b[32m  \u001b[33m  \u001b[34m  \u001b[35m  \u001b[36m  \u001b[37m  \u001b[90m "
     },
-    "break",
-  ],
+    "break"
+  ]
 }
