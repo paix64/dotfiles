@@ -200,6 +200,10 @@ install_theme() {
 	gsettings set org.gnome.desktop.interface cursor-theme $cursor_theme > /dev/null 2>&1 &
 	gsettings set org.gnome.desktop.interface cursor-size 24 > /dev/null 2>&1 & 
 	gsettings set org.gnome.desktop.interface font-name "Ubuntu Nerd Font Bold 12" > /dev/null 2>&1 &
+	
+	sudo mkdir /etc/sddm.conf.d
+	echo "[Theme]
+Current=sugar-dark" | sudo tee /etc/sddm.conf.d/theme.conf 
 }
 
 finalize() {
