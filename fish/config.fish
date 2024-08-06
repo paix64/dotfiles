@@ -26,7 +26,6 @@ alias gl="git log"
 alias gpu="git pull"
 alias gr="git restore"
 
-alias m="micro"
 alias n="nvim"
 alias cat="bat"
 alias exe="chmod +x"
@@ -43,10 +42,6 @@ end
 # Set default apps
 xdg-mime default org.gnome.Nautilus.desktop inode/directory
 xdg-mime default floorp.desktop x-scheme-handler/https
-
-# bun
-set --export BUN_INSTALL "$HOME/.bun"
-set --export PATH $BUN_INSTALL/bin $PATH
 
 # Set up zoxide as cd
 zoxide init --cmd cd fish | source

@@ -114,11 +114,17 @@ setup_firewall() {
 	echo ":: Setting up firewall"
 	sleep .4
 	
+	systemctl enable --now ufw
 	sudo ufw enable
 	sudo ufw default deny
 	sudo ufw allow from 192.168.0.0/24
 	sudo ufw deny ssh
 
+}
+
+setup_bun() {
+	curl -fsSL https://bun.sh/install | bash
+	sudo ln -s $HOME/.bun/bin/bun /usr/local/bin/bun
 }
 
 setup_rust() {
