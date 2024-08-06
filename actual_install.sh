@@ -130,6 +130,15 @@ setup_bun() {
 	sudo ln -s $HOME/.bun/bin/bun /usr/local/bin/bun
 }
 
+setup_os_prober() {
+	echo ":: Setting up OS prober"
+	sleep .4
+	
+	sudo cp /etc/default/grub /etc/default/grub.bak
+	sudo sed -i '/^#GRUB_DISABLE_OS_PROBER=false/s/^#//' /etc/default/grub
+	sudo grub-mkconfig -o /boot/grub/grub.cfg
+} 
+
 setup_timeshift() {
     echo ":: Setting up timeshift"
     sleep .4
