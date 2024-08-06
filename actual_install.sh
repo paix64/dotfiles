@@ -203,7 +203,13 @@ install_theme() {
 	
 	sudo mkdir /etc/sddm.conf.d
 	echo "[Theme]
-Current=sugar-dark" | sudo tee /etc/sddm.conf.d/theme.conf 
+Current=sugar-dark" | sudo tee /etc/sddm.conf.d/theme.conf
+
+	local theme_config="/usr/share/sddm/themes/sugar-dark/theme.conf"
+	sudo cp "$theme_config" "${theme_config}.bak"
+	sudo sed -i 's/^ForceHideCompletePassword=false/ForceHideCompletePassword=true/' "$theme_config"
+
+
 }
 
 finalize() {
