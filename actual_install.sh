@@ -123,8 +123,50 @@ setup_firewall() {
 }
 
 setup_bun() {
+	echo ":: Setting up bun"
+	sleep .4
+	
 	curl -fsSL https://bun.sh/install | bash
 	sudo ln -s $HOME/.bun/bin/bun /usr/local/bin/bun
+}
+
+setup_timeshift() {
+    echo ":: Setting up timeshift"
+    sleep .4
+    
+    systemctl enable --now cronie
+    
+    local ROOT=$(findmnt -no UUID /)
+    
+    sudo tee /etc/timeshift/timeshift.json > /dev/null <<EOF
+{
+    "backup_device_uuid" : "$ROOT",
+    "parent_device_uuid" : "",
+    "do_first_run" : "false",
+    "btrfs_mode" : "false",
+    "include_btrfs_home_for_backup" : "false",
+    "include_btrfs_home_for_restore" : "false",
+    "stop_cron_emails" : "true",
+    "schedule_monthly" : "false",
+    "schedule_weekly" : "false",
+    "schedule_daily" : "true",
+    "schedule_hourly" : "true",
+    "schedule_boot" : "true",
+    "count_monthly" : "2",
+    "count_weekly" : "3",
+    "count_daily" : "3",
+    "count_hourly" : "3",
+    "count_boot" : "3",
+    "snapshot_size" : "",
+    "snapshot_count" : "",
+    "date_format" : "%Y-%m-%d %H:%M:%S",
+    "exclude" : [
+      "+ /home/$USER/**",
+      "+ /root/**"
+    ],
+    "exclude-apps" : []
+}
+EOF
 }
 
 setup_rust() {
