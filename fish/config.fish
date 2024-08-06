@@ -48,9 +48,6 @@ xdg-mime default floorp.desktop x-scheme-handler/https
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
 
-# rust
-source "$HOME/.cargo/env.fish"
-
 # Set up zoxide as cd
 zoxide init --cmd cd fish | source
 

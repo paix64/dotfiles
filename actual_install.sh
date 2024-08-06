@@ -103,6 +103,31 @@ update_user_dirs() {
     xdg-user-dirs-update
 }
 
+setup_shell() {
+	echo ":: Setting up fish"
+	sleep .4
+	
+	chsh -s $(which fish)
+}
+
+setup_firewall() {
+	echo ":: Setting up firewall"
+	sleep .4
+	
+	sudo ufw enable
+	sudo ufw default deny
+	sudo ufw allow from 192.168.0.0/24
+	sudo ufw deny ssh
+
+}
+
+setup_rust() {
+	echo ":: Setting up rust"
+	sleep .4
+	
+	rustup default stable
+}
+
 install_theme() {
 	echo ":: Installing Themes"
 	sleep .4
