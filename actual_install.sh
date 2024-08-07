@@ -212,6 +212,33 @@ Current=sugar-dark" | sudo tee /etc/sddm.conf.d/theme.conf
 
 }
 
+setup_pacman() {
+	echo ":: Setting up pacman"
+	sleep .4
+	
+	local pacman_config_file="/etc/pacman.conf"
+	local make_config_file="/etc/makepkg.conf"
+	
+    sudo cp "$pacman_config_file" "${pacman_config_file}.bak"
+    sudo cp "$make_config_file" "${make_config_file}.bak"
+
+    sudo sed -i 's/^#Color/Color/' "$pacman_config_file"
+    sudo sed -i 's/^#ParallelDownloads = 5/ParallelDownloads = 3/' "$pacman_config_file"
+    
+    sudo sed -i 's/^#MAKEFLAGS="-j2"/MAKEFLAGS="-j8"/' "$make_config_file"
+    sudo sed -i 's/OPTIONS=(strip docs !libtool !staticlibs emptydirs zipman purge debug lto)/OPTIONS=(strip docs !libtool !staticlibs emptydirs zipman purge !debug lto)/' "$make_config_file"
+}
+
+setup_dns() {
+	local config_file="/etc/resolv.conf"
+
+    # Backup the original configuration file
+    sudo cp "$config_file" "${config_file}.bak"
+
+    # Append the nameserver lines to the configuration file
+    echo -e "nameserver 1.1.1.1\nnameserver 1.0.0.1" | sudo tee -a "$config_file"
+}
+
 finalize() {
     echo ":: Finishing installation"
     sleep .4
