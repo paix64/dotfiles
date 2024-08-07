@@ -233,7 +233,7 @@ setup_nvidia() {
 
   echo ":: Currenct kernel: $(uname -r)"
   sleep 1
-  sudo mkinitcpio
+  sudo mkinitcpio -p linux
 	
   # SET UP HOOK
 	sudo mkdir -p /etc/pacman.d/hooks/
