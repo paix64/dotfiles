@@ -212,6 +212,14 @@ Current=sugar-dark" | sudo tee /etc/sddm.conf.d/theme.conf
 
 }
 
+setup_asusctl() {
+	echo ":: Setting up asusctl"
+	sleep .4
+
+	asusctl -c 80
+	
+}
+
 setup_pacman() {
 	echo ":: Setting up pacman"
 	sleep .4
