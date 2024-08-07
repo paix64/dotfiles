@@ -212,8 +212,12 @@ Current=sugar-dark" | sudo tee /etc/sddm.conf.d/theme.conf
 
 setup_nvidia() {
 	yay --noconfirm --needed nvidia
-	sudo cp /etc/default/grub /etc/default/grub.bak
-	sudo sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*$/GRUB_CMDLINE_LINUX_DEFAULT="quiet loglevel=3 nvidia_drm.modeset=1"/' /etc/default/grub
+
+	local grub_config="/etc/default/grub"
+	sudo cp "$grub_config" "${grub_config}.bak"
+	
+	sudo sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*$/GRUB_CMDLINE_LINUX_DEFAULT="quiet loglevel=3 nvidia-drm.modeset=1"/' "$grub_config"
+	
 	sudo grub-mkconfig -o /boot/grub/grub.cfg
 	
 	local mk_config="/etc/mkinitcpio.conf"
