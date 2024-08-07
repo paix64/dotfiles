@@ -231,6 +231,8 @@ setup_nvidia() {
 	sudo sed -i 's/^MODULES=().*/MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)/' "$mk_config"
 	sudo sed -i 's/HOOKS=(\([^)]*\) kms\([^)]*\))/HOOKS=(\1\2)/' "$mk_config"
 
+  echo ":: Currenct kernel: $(uname -r)"
+  sleep 1
   sudo mkinitcpio
 	
   # SET UP HOOK
