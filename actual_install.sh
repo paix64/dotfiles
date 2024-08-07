@@ -211,7 +211,10 @@ Current=sugar-dark" | sudo tee /etc/sddm.conf.d/theme.conf
 }
 
 setup_nvidia() {
-	yay --noconfirm --needed -S nvidia nvidia-lts
+	echo ":: Installing Nvidia"
+	sleep .4
+
+  yay --noconfirm --needed -S nvidia
   
   # SET UP GRUB
 	local grub_config="/etc/default/grub"
@@ -221,7 +224,6 @@ setup_nvidia() {
 	
 	sudo grub-mkconfig -o /boot/grub/grub.cfg
 	
-
   # SET UP MKINITCPIO
 	local mk_config="/etc/mkinitcpio.conf"
 	sudo cp "$mk_config" "${mk_config}.bak"
@@ -229,7 +231,7 @@ setup_nvidia() {
 	sudo sed -i 's/^MODULES=().*/MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)/' "$mk_config"
 	sudo sed -i 's/HOOKS=(\([^)]*\) kms\([^)]*\))/HOOKS=(\1\2)/' "$mk_config"
 
-  sudo mkinitcpio -P
+  sudo mkinitcpio
 	
   # SET UP HOOK
 	sudo mkdir -p /etc/pacman.d/hooks/
