@@ -216,6 +216,12 @@ setup_nvidia() {
 	sudo sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*$/GRUB_CMDLINE_LINUX_DEFAULT="quiet loglevel=3 nvidia_drm.modeset=1"/' /etc/default/grub
 	sudo grub-mkconfig -o /boot/grub/grub.cfg
 	
+	local mk_config="/etc/mkinitcpio.conf"
+	sudo cp "$mk_config" "${mk_config}.bak"
+	
+	sudo sed -i 's/^MODULES=().*/MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)/' "$mk_config"
+	sudo sed -i 's/HOOKS=(\([^)]*\) kms\([^)]*\))/HOOKS=(\1\2)/' "$mk_config"
+	
 	sudo mkdir -p /etc/pacman.d/hooks/
 	echo "[Trigger]
 	Operation=Install
