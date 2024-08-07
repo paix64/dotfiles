@@ -208,9 +208,15 @@ Current=sugar-dark" | sudo tee /etc/sddm.conf.d/theme.conf
 	local theme_config="/usr/share/sddm/themes/sugar-dark/theme.conf"
 	sudo cp "$theme_config" "${theme_config}.bak"
 	sudo sed -i 's/^ForceHideCompletePassword=false/ForceHideCompletePassword=true/' "$theme_config"
-
-
 }
+
+setup_nvidia() {
+	yay --noconfirm --needed nvidia
+	sudo cp /etc/default/grub /etc/default/grub.bak
+	sudo sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*$/GRUB_CMDLINE_LINUX_DEFAULT="quiet loglevel=3 nvidia_drm.modeset=1"/' /etc/default/grub
+	sudo grub-mkconfig -o /boot/grub/grub.cfg
+}
+
 
 setup_asusctl() {
 	echo ":: Setting up asusctl"
@@ -219,6 +225,7 @@ setup_asusctl() {
 	asusctl -c 80
 	
 }
+
 
 setup_pacman() {
 	echo ":: Setting up pacman"
