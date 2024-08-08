@@ -1,0 +1,66 @@
+{
+    "files.autoSave": "afterDelay",
+    "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\cmd.exe",
+    "editor.detectIndentation": false,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "editor.fontFamily": "JetBrains Mono, Cousine Nerd Font, Consolas, 'Courier New', monospace",
+    "git.openRepositoryInParentFolders": "never",
+    "editor.fontLigatures": true,
+    "explorer.confirmDelete": false,
+    "security.workspace.trust.untrustedFiles": "open",
+    "files.associations": {
+        "*.py": "python"
+    },
+    "html.format.contentUnformatted": "",
+    "svelte.enable-ts-plugin": true,
+    "[svelte]": {
+        "editor.defaultFormatter": "svelte.svelte-vscode"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "python.analysis.completeFunctionParens": true,
+    "git.autofetch": true,
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+    "editor.cursorSmoothCaretAnimation": "on",
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.colorTheme": "Gruvbox Dark Hard",
+    "github.copilot.editor.enableAutoCompletions": true,
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false,
+        "lua": false,
+        "rust": false
+    },
+    "[rust]": {
+        "editor.defaultFormatter": "rust-lang.rust-analyzer"
+    },
+    "window.menuBarVisibility": "toggle",
+    "workbench.activityBar.location": "hidden",
+    "editor.minimap.enabled": false,
+    "indentRainbow.ignoreLinePatterns": [
+        "/[ \t]* [*]/g",
+        "/[ \t]+[/]{2}/g"
+    ],
+    "workbench.tips.enabled": false,
+    "editor.lightbulb.enabled": "off",
+    "window.zoomLevel": 2,
+    "terminal.external.linuxExec": "bash",
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "workbench.editor.editorActionsLocation": "titleBar",
+    "editor.fontVariations": false,
+    "terminal.integrated.fontSize": 12,
+    "workbench.externalBrowser": "floorp",
+    "rust-analyzer.typing.autoClosingAngleBrackets.enable": true,
+    "window.customTitleBarVisibility": "auto",
+    "workbench.settings.applyToAllProfiles": [
+        "editor.fontFamily"
+    ],
+}
