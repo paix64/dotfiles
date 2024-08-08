@@ -66,19 +66,29 @@ def main():
         installed_packages, config_packages, system_packages
     )
 
-    print(f"\n:: {len(installed_packages)} packages are installed.") 
+    all_in_config = False
+    all_config_installed = False
+
+    print(f"\n:: {len(installed_packages)} packages are installed.")
     if not_in_given:
         print(f"> Packages that are not in config:")
         for pkg in not_in_given:
             print(pkg)
     else:
-        print("> All installed packages are in the packages.conf.")
+        all_in_config = True
 
     if not_installed:
         print("\n> Packages in the config but not installed:")
         for pkg in not_installed:
             print(pkg)
     else:
+        all_config_installed = True
+
+    if all_config_installed and all_in_config:
+        print(">> All packages are up to date")
+    elif all_in_config:
+        print("> All installed packages are in the packages.conf.")
+    elif all_config_installed:
         print("> All config packages are installed.")
 
 
