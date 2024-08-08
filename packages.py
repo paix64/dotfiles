@@ -28,6 +28,13 @@ def read_config_packages(file_path):
                 for line in file
                 if line.strip().startswith("##")
             ]
+            file.seek(0)
+            aur_packages = [
+                line.split()[0].strip()
+                for line in file
+                if len(line.split()) == 3 and not line.strip().startswith("#")
+            ]
+            print(f"\n:: AUR packages count: {len(aur_packages)}")
 
         return config_packages, system_packages
 
@@ -69,7 +76,7 @@ def main():
     all_in_config = False
     all_config_installed = False
 
-    print(f"\n:: {len(installed_packages)} packages are installed.")
+    print(f":: {len(installed_packages)} packages are installed.")
     if not_in_given:
         print(f"> Packages that are not in config:")
         for pkg in not_in_given:
