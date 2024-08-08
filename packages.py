@@ -66,19 +66,20 @@ def main():
         installed_packages, config_packages, system_packages
     )
 
+    print(f"\n:: {len(installed_packages)} packages are installed.") 
     if not_in_given:
-        print("Packages installed but not in packages.conf")
+        print(f"> Packages that are not in config:")
         for pkg in not_in_given:
             print(pkg)
     else:
-        print("All installed packages are in the packages.conf.")
+        print("> All installed packages are in the packages.conf.")
 
     if not_installed:
-        print("\nPackages in the config but not installed:")
+        print("\n> Packages in the config but not installed:")
         for pkg in not_installed:
             print(pkg)
     else:
-        print("All config packages are installed.")
+        print("> All config packages are installed.")
 
 
 if __name__ == "__main__":
