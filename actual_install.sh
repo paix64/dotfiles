@@ -218,9 +218,9 @@ setup_nvidia() {
 	echo ":: Installing Nvidia"
 	sleep .4
 
-  yay --noconfirm --needed -S nvidia
+	yay --noconfirm --needed -S nvidia
   
-  # SET UP GRUB
+	# SET UP GRUB
 	local grub_config="/etc/default/grub"
 	sudo cp "$grub_config" "${grub_config}_${DATE}.bak"
 	
@@ -228,18 +228,18 @@ setup_nvidia() {
 	
 	sudo grub-mkconfig -o /boot/grub/grub.cfg
 	
-  # SET UP MKINITCPIO
+	# SET UP MKINITCPIO
 	local mk_config="/etc/mkinitcpio.conf"
 	sudo cp "$mk_config" "${mk_config}_${DATE}.bak"
 	
 	sudo sed -i 's/^MODULES=().*/MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)/' "$mk_config"
 	sudo sed -i 's/HOOKS=(\([^)]*\) kms\([^)]*\))/HOOKS=(\1\2)/' "$mk_config"
 
-  echo ":: Currenct kernel: $(uname -r)"
-  sleep 1
-  sudo mkinitcpio -p linux
+	echo ":: Currenct kernel: $(uname -r)"
+	sleep 1
+	sudo mkinitcpio -p linux
 	
-  # SET UP HOOK
+	# SET UP HOOK
 	sudo mkdir -p /etc/pacman.d/hooks/
 	echo "[Trigger]
 	Operation=Install
