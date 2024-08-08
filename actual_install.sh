@@ -132,7 +132,7 @@ setup_bun() {
 	sudo ln -s $HOME/.bun/bin/bun /usr/local/bin/bun
 }
 
-setup_os_prober() {
+setup_grub() {
 	echo ":: Setting up OS prober"
 	sleep .4
 	
@@ -140,6 +140,8 @@ setup_os_prober() {
 	sudo cp "$grub_config" "${grub_config}_${DATE}.bak"
 	
 	sudo sed -i '/^#GRUB_DISABLE_OS_PROBER=false/s/^#//' "$grub_config"
+	sudo sed -i '/^#GRUB_DISABLE_SUBMENU=y/s/^#//' "$grub_config"
+	
 	sudo grub-mkconfig -o /boot/grub/grub.cfg
 } 
 
