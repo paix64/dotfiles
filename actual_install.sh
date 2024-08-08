@@ -1,5 +1,7 @@
 #!/bin/bash
 
+DATE=$(date +%F_%H:%M)
+
 install_yay() {
     echo ":: Installing yay..."
     sleep .4
@@ -134,8 +136,10 @@ setup_os_prober() {
 	echo ":: Setting up OS prober"
 	sleep .4
 	
-	sudo cp /etc/default/grub /etc/default/grub.bak
-	sudo sed -i '/^#GRUB_DISABLE_OS_PROBER=false/s/^#//' /etc/default/grub
+	local grub_config="/etc/default/grub"
+	sudo cp "$grub_config" "${grub_config}_${DATE}.bak"
+	
+	sudo sed -i '/^#GRUB_DISABLE_OS_PROBER=false/s/^#//' "$grub_config"
 	sudo grub-mkconfig -o /boot/grub/grub.cfg
 } 
 
@@ -206,7 +210,7 @@ install_theme() {
 Current=sugar-dark" | sudo tee /etc/sddm.conf.d/theme.conf
 
 	local theme_config="/usr/share/sddm/themes/sugar-dark/theme.conf"
-	sudo cp "$theme_config" "${theme_config}.bak"
+	sudo cp "$theme_config" "${theme_config}_${DATE}.bak"
 	sudo sed -i 's/^ForceHideCompletePassword=false/ForceHideCompletePassword=true/' "$theme_config"
 }
 
@@ -218,7 +222,7 @@ setup_nvidia() {
   
   # SET UP GRUB
 	local grub_config="/etc/default/grub"
-	sudo cp "$grub_config" "${grub_config}.bak"
+	sudo cp "$grub_config" "${grub_config}_${DATE}.bak"
 	
 	sudo sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*$/GRUB_CMDLINE_LINUX_DEFAULT="quiet loglevel=3 nvidia-drm.modeset=1"/' "$grub_config"
 	
@@ -226,7 +230,7 @@ setup_nvidia() {
 	
   # SET UP MKINITCPIO
 	local mk_config="/etc/mkinitcpio.conf"
-	sudo cp "$mk_config" "${mk_config}.bak"
+	sudo cp "$mk_config" "${mk_config}_${DATE}.bak"
 	
 	sudo sed -i 's/^MODULES=().*/MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)/' "$mk_config"
 	sudo sed -i 's/HOOKS=(\([^)]*\) kms\([^)]*\))/HOOKS=(\1\2)/' "$mk_config"
@@ -271,8 +275,8 @@ setup_pacman() {
 	local pacman_config_file="/etc/pacman.conf"
 	local make_config_file="/etc/makepkg.conf"
 	
-    sudo cp "$pacman_config_file" "${pacman_config_file}.bak"
-    sudo cp "$make_config_file" "${make_config_file}.bak"
+    sudo cp "$pacman_config_file" "${pacman_config_file}_${DATE}.bak"
+    sudo cp "$make_config_file" "${make_config_file}_${DATE}.bak"
 
     sudo sed -i 's/^#Color/Color/' "$pacman_config_file"
     sudo sed -i 's/^#ParallelDownloads = 5/ParallelDownloads = 3/' "$pacman_config_file"
@@ -285,7 +289,7 @@ setup_dns() {
 	local config_file="/etc/resolv.conf"
 
     # Backup the original configuration file
-    sudo cp "$config_file" "${config_file}.bak"
+    sudo cp "$config_file" "${config_file}_${DATE}.bak"
 
     # Append the nameserver lines to the configuration file
     echo -e "nameserver 1.1.1.1\nnameserver 1.0.0.1" | sudo tee -a "$config_file"
