@@ -141,7 +141,8 @@ setup_grub() {
 	
 	sudo sed -i '/^#GRUB_DISABLE_OS_PROBER=false/s/^#//' "$grub_config"
 	sudo sed -i '/^#GRUB_DISABLE_SUBMENU=y/s/^#//' "$grub_config"
-	
+	sudo sed -i 's/^GRUB_DEFAULT=0/GRUB_DEFAULT=3/' "$grub_config"
+
 	sudo grub-mkconfig -o /boot/grub/grub.cfg
 } 
 
@@ -256,7 +257,7 @@ setup_nvidia() {
 	Depends=mkinitcpio
 	When=PostTransaction
 	NeedsTargets
-	Exec=/bin/sh -c 'while read -r trg; do case $trg in linux*) exit 0; esac; done; /usr/bin/mkinitcpio -P'
+	Exec=/bin/sh -c 'while read -r trg; do case ${trg} in linux*) exit 0; esac; done; /usr/bin/mkinitcpio -P'
 	" | sudo tee /etc/pacman.d/hooks/nvidia.hook
 }
 
