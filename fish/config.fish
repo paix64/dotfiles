@@ -29,7 +29,6 @@ alias gr="git restore"
 alias n="nvim"
 alias cat="bat"
 alias exe="chmod +x"
-alias code="code --disable-gpu"
 alias py="python"
 
 # !! functionality for sudo
