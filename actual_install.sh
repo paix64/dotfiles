@@ -146,7 +146,7 @@ setup_grub() {
 	
 	sudo sed -i '/^#GRUB_DISABLE_OS_PROBER=false/s/^#//' "$grub_config"
 	sudo sed -i '/^#GRUB_DISABLE_SUBMENU=y/s/^#//' "$grub_config"
-	sudo sed -i 's/^GRUB_DEFAULT=0/GRUB_DEFAULT=3/' "$grub_config"
+	sudo sed -i 's/^GRUB_DEFAULT=0/GRUB_DEFAULT=2/' "$grub_config"
 
 	sudo grub-mkconfig -o /boot/grub/grub.cfg
 } 
