@@ -132,6 +132,11 @@ setup_bun() {
 	sudo ln -s $HOME/.bun/bin/bun /usr/local/bin/bun
 }
 
+setup_electron(){
+    echo -e "--enable-features=UseOzonePlatform\n--ozone-platform=wayland\n--disable-gpu-compositing" > ~/.config/electron-flags.conf
+    ln -s ~/.config/electron-flags.conf ~/.config/code-flags.conf
+}
+
 setup_grub() {
 	echo ":: Setting up OS prober"
 	sleep .4
@@ -244,21 +249,7 @@ setup_nvidia() {
 	
 	# SET UP HOOK
 	sudo mkdir -p /etc/pacman.d/hooks/
-	echo "[Trigger]
-	Operation=Install
-	Operation=Upgrade
-	Operation=Remove
-	Type=Package
-	Target=nvidia
-	Target=linux
-
-	[Action]
-	Description=Updating NVIDIA module in initcpio
-	Depends=mkinitcpio
-	When=PostTransaction
-	NeedsTargets
-	Exec=/bin/sh -c 'while read -r trg; do case ${trg} in linux*) exit 0; esac; done; /usr/bin/mkinitcpio -P'
-	" | sudo tee /etc/pacman.d/hooks/nvidia.hook
+    sudo cp nvidia.hook /etc/pacman.d/hooks/nvidia.hook
 }
 
 
