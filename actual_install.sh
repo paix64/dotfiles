@@ -113,6 +113,15 @@ setup_shell() {
 	chsh -s $(which fish)
 }
 
+setup_power_key() {
+	echo ":: Setting up power key"
+	sleep .4
+	
+	sudo cp /etc/systemd/logind.conf /etc/systemd/logind.conf.bak
+	sudo sed -i 's/^#HandlePowerKey=poweroff/HandlePowerKey=ignore/' /etc/systemd/logind.conf
+
+}
+
 setup_firewall() {
 	echo ":: Setting up firewall"
 	sleep .4
