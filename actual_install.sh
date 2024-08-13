@@ -66,15 +66,16 @@ copy_config_folders() {
 	echo ":: Creating links"
 	sleep .4
 	
-	ln -s $HOME/dotfiles/ags $HOME/.config/ags
-	ln -s $HOME/dotfiles/kitty $HOME/.config/kitty
-	ln -s $HOME/dotfiles/hypr $HOME/.config/hypr
-	ln -s $HOME/dotfiles/fish $HOME/.config/fish
-	ln -s $HOME/dotfiles/fastfetch $HOME/.config/fastfetch
-	ln -s $HOME/dotfiles/oh-my-posh $HOME/.config/oh-my-posh
+	ln -s $HOME/dotfiles/ags $HOME/.config/
+	ln -s $HOME/dotfiles/kitty $HOME/.config/
+	ln -s $HOME/dotfiles/hypr $HOME/.config/
+	ln -s $HOME/dotfiles/fish $HOME/.config/
+	ln -s $HOME/dotfiles/fastfetch $HOME/.config/
+	ln -s $HOME/dotfiles/oh-my-posh $HOME/.config/
 	ln -s $HOME/dotfiles/localshare/zoxide $HOME/.local/share/
 	ln -s $HOME/dotfiles/rofi $HOME/.config/
 	ln -s $HOME/dotfiles/nvim $HOME/.config/
+	ln -s $HOME/dotfiles/wlogout $HOME/.config/
 }
 
 setup_services() {
