@@ -141,6 +141,7 @@ setup_bun() {
 	
 	curl -fsSL https://bun.sh/install | bash
 	sudo ln -s $HOME/.bun/bin/bun /usr/local/bin/bun
+	sudo ln -s $HOME/.bun/bin/bunx /usr/local/bin/bunx
 }
 
 setup_electron(){
