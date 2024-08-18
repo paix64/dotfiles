@@ -264,6 +264,14 @@ setup_nvidia() {
     sudo cp nvidia.hook /etc/pacman.d/hooks/nvidia.hook
 }
 
+setup_nautilus() {
+	echo ":: Setting up nautilus"
+	sleep .4
+	
+	gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal kitty
+	
+
+}
 
 setup_asusctl() {
 	echo ":: Setting up asusctl"
