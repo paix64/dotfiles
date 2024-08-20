@@ -32,18 +32,9 @@ alias cat="bat"
 alias exe="chmod +x"
 alias py="python"
 
-# !! functionality for sudo
-function sudo
-    if test "$argv" = !!
-        eval command sudo $history[1]
-    else
-        command sudo $argv
-    end
-end
-
 # Set default apps
 xdg-mime default org.gnome.Nautilus.desktop inode/directory
-xdg-mime default floorp.desktop x-scheme-handler/https
+xdg-mime default zen-browser.desktop x-scheme-handler/https
 
 # Set up zoxide as cd
 zoxide init --cmd cd fish | source
