@@ -83,21 +83,14 @@ setup_services() {
     echo ":: Setting up services"
     sleep .4
 
-    if systemctl is-active --quiet bluetooth.service; then
-        echo ":: bluetooth.service already running."
-    else
-        sudo systemctl enable bluetooth.service
-        sudo systemctl start bluetooth.service
+        sudo systemctl enable --now bluetooth.service
         echo ":: bluetooth.service activated successfully."
-    fi
 
-    if systemctl is-active --quiet NetworkManager.service; then
-        echo ":: NetworkManager.service already running."
-    else
-        sudo systemctl enable NetworkManager.service
-        sudo systemctl start NetworkManager.service
+        sudo systemctl enable --now NetworkManager.service
         echo ":: NetworkManager.service activated successfully."
-    fi
+
+        sudo systemctl enable --now preload.service
+        echo ":: preload.service activated successfully." 
 }
 
 update_user_dirs() {
