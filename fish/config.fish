@@ -35,6 +35,7 @@ alias py="python"
 # Set default apps
 xdg-mime default nemo.desktop inode/directory
 xdg-mime default zen-browser.desktop x-scheme-handler/https
+xdg-mime default org.gnome.gedit.desktop text/plain
 
 # Set up zoxide as cd
 zoxide init --cmd cd fish | source
