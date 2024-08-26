@@ -33,7 +33,7 @@ alias exe="chmod +x"
 alias py="python"
 
 # Set default apps
-xdg-mime default org.gnome.Nautilus.desktop inode/directory
+xdg-mime default nemo.desktop inode/directory
 xdg-mime default zen-browser.desktop x-scheme-handler/https
 
 # Set up zoxide as cd

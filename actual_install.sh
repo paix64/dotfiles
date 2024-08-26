@@ -88,9 +88,6 @@ setup_services() {
 
         sudo systemctl enable --now NetworkManager.service
         echo ":: NetworkManager.service activated successfully."
-
-        sudo systemctl enable --now preload.service
-        echo ":: preload.service activated successfully." 
 }
 
 update_user_dirs() {
@@ -100,7 +97,7 @@ update_user_dirs() {
     xdg-user-dirs-update
 }
 
-setup_shell() {
+setup_fish() {
 	echo ":: Setting up fish"
 	sleep .4
 	
@@ -125,7 +122,6 @@ setup_firewall() {
 	sudo ufw default deny
 	sudo ufw allow from 192.168.0.0/24
 	sudo ufw deny ssh
-
 }
 
 setup_bun() {
@@ -217,7 +213,7 @@ install_theme() {
 	gsettings set org.gnome.desktop.interface cursor-theme $cursor_theme > /dev/null 2>&1 &
 	gsettings set org.gnome.desktop.interface cursor-size 24 > /dev/null 2>&1 & 
 	gsettings set org.gnome.desktop.interface font-name "Ubuntu Nerd Font Bold 12" > /dev/null 2>&1 &
-	
+
 	sudo mkdir /etc/sddm.conf.d
 	echo "[Theme]
 Current=sugar-dark" | sudo tee /etc/sddm.conf.d/theme.conf
@@ -227,42 +223,11 @@ Current=sugar-dark" | sudo tee /etc/sddm.conf.d/theme.conf
 	sudo sed -i 's/^ForceHideCompletePassword=false/ForceHideCompletePassword=true/' "$theme_config"
 }
 
-setup_nvidia() {
-	echo ":: Installing Nvidia"
-	sleep .4
-
-	yay --noconfirm --needed -S nvidia
-  
-	# SET UP GRUB
-	local grub_config="/etc/default/grub"
-	sudo cp "$grub_config" "${grub_config}_${DATE}.bak"
-	
-	sudo sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*$/GRUB_CMDLINE_LINUX_DEFAULT="quiet loglevel=3 nvidia-drm.modeset=1"/' "$grub_config"
-	
-	sudo grub-mkconfig -o /boot/grub/grub.cfg
-	
-	# SET UP MKINITCPIO
-	local mk_config="/etc/mkinitcpio.conf"
-	sudo cp "$mk_config" "${mk_config}_${DATE}.bak"
-	
-	sudo sed -i 's/^MODULES=().*/MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)/' "$mk_config"
-	sudo sed -i 's/HOOKS=(\([^)]*\) kms\([^)]*\))/HOOKS=(\1\2)/' "$mk_config"
-
-	echo ":: Currenct kernel: $(uname -r)"
-	sleep 1
-	sudo mkinitcpio -p linux
-	
-	# SET UP HOOK
-	sudo mkdir -p /etc/pacman.d/hooks/
-    sudo cp nvidia.hook /etc/pacman.d/hooks/nvidia.hook
-}
-
-setup_nautilus() {
-	echo ":: Setting up nautilus"
+setup_nemo() {
+	echo ":: Setting up nemo"
 	sleep .4
 	
-	gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal kitty
-	
+	gsettings set org.cinnamon.desktop.default-applications.terminal exec kitty
 
 }
 
