@@ -1,8 +1,8 @@
 if status is-interactive
-fastfetch
+    fastfetch
 end
 
-set EDITOR "/usr/bin/nvim"
+set EDITOR /usr/bin/nvim
 
 alias ls="exa --color=auto --hyperlink --icons=auto"
 alias la="exa -a --color=auto --hyperlink --icons=auto"
@@ -10,6 +10,7 @@ alias lal="exa -la --color=auto --hyperlink --icons=auto"
 alias şs="ls"
 alias l="ls"
 
+alias ::="cd -"
 alias cd..="cd .."
 alias ..="cd .."
 alias ...="cd ../.."
@@ -29,6 +30,7 @@ alias gr="git restore"
 
 alias n="nvim"
 alias cat="bat"
+alias grep="rg"
 alias exe="chmod +x"
 alias py="python"
 
@@ -45,4 +47,3 @@ fzf --fish | source
 
 # Set up oh-my-posh
 oh-my-posh init fish -c ~/.config/oh-my-posh/zen.toml | source
-
