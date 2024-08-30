@@ -22,7 +22,7 @@ local config = {
 	selection_word_boundary = "\t\n{}[]()\"'`-/.,;:❯ ",
 	line_height = 0.90,
 	hide_tab_bar_if_only_one_tab = true,
-
+	show_new_tab_button_in_tab_bar = false,
 	colors = {
 		-- foreground = "#00FF00",
 		-- background = "black",
@@ -37,7 +37,7 @@ local config = {
 	},
 	keys = {
 		{ key = "F1", mods = "", action = act.SpawnTab("CurrentPaneDomain") },
-		{ key = "w", mods = "ALT", action = act.CloseCurrentTab({ confirm = true }) },
+		{ key = "w", mods = "CTRL", action = act.CloseCurrentTab({ confirm = true }) },
 		{ key = "1", mods = "ALT", action = act.ActivateTab(0) },
 		{ key = "2", mods = "ALT", action = act.ActivateTab(1) },
 		{ key = "3", mods = "ALT", action = act.ActivateTab(2) },
@@ -48,6 +48,7 @@ local config = {
 bar.apply_to_config(config, {
 	position = "top",
 	enabled_modules = {
+
 		workspace = false,
 		pane = false,
 		clock = false,
