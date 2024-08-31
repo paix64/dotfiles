@@ -2,14 +2,14 @@
 
 DATE=$(date +%F_%H:%M)
 
-install_yay() {
-  echo ":: Installing yay..."
+install_paru() {
+  echo ":: Installing paru..."
   sleep .4
 
   sudo pacman -Syu --noconfirm
   sudo pacman -S --needed --noconfirm base-devel git
-  git clone https://aur.archlinux.org/yay.git /tmp/yay
-  cd /tmp/yay
+  git clone --depth 1 https://aur.archlinux.org/paru-bin.git /tmp/paru
+  cd /tmp/paru
   makepkg -si --noconfirm --needed
 }
 
@@ -274,6 +274,6 @@ finalize() {
   ags --init
 }
 
-install_yay
+install_paru
 setup_pacman
 copy_config_folders
