@@ -17,7 +17,11 @@ local config = {
 
 	font_size = 16.0,
 	font = wezterm.font("Jetbrains Mono Nerd Font", { weight = "Bold" }),
-
+	default_cursor_style = "BlinkingBar",
+	cursor_blink_rate = 500,
+	cursor_thickness = "2px",
+	cursor_blink_ease_in = "Constant",
+	cursor_blink_ease_out = "Constant",
 	color_scheme = "Gruvbox dark, hard (base16)",
 	selection_word_boundary = "\t\n{}[]()\"'`-/.,;:❯ ",
 	line_height = 0.90,
