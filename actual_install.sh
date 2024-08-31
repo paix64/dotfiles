@@ -138,20 +138,6 @@ setup_electron() {
   ln -s ~/.config/electron-flags.conf ~/.config/code-flags.conf
 }
 
-setup_grub() {
-  echo ":: Setting up OS prober"
-  sleep .4
-
-  local grub_config="/etc/default/grub"
-  sudo cp "$grub_config" "${grub_config}_${DATE}.bak"
-
-  sudo sed -i '/^#GRUB_DISABLE_OS_PROBER=false/s/^#//' "$grub_config"
-  sudo sed -i '/^#GRUB_DISABLE_SUBMENU=y/s/^#//' "$grub_config"
-  sudo sed -i 's/^GRUB_DEFAULT=0/GRUB_DEFAULT=2/' "$grub_config"
-
-  sudo grub-mkconfig -o /boot/grub/grub.cfg
-}
-
 setup_timeshift() {
   echo ":: Setting up timeshift"
   sleep .4
@@ -254,16 +240,6 @@ setup_pacman() {
 
   sudo sed -i 's/^#MAKEFLAGS="-j2"/MAKEFLAGS="-j8"/' "$make_config_file"
   sudo sed -i 's/OPTIONS=(strip docs !libtool !staticlibs emptydirs zipman purge debug lto)/OPTIONS=(strip docs !libtool !staticlibs emptydirs zipman purge !debug lto)/' "$make_config_file"
-}
-
-setup_dns() {
-  local config_file="/etc/resolv.conf"
-
-  # Backup the original configuration file
-  sudo cp "$config_file" "${config_file}_${DATE}.bak"
-
-  # Append the nameserver lines to the configuration file
-  echo -e "nameserver 1.1.1.1\nnameserver 1.0.0.1" | sudo tee -a "$config_file"
 }
 
 finalize() {
