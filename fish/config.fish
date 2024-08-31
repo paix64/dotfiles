@@ -33,6 +33,7 @@ alias cat="bat"
 alias grep="rg"
 alias exe="chmod +x"
 alias py="python"
+alias yay="paru"
 
 # Set default apps
 xdg-mime default nemo.desktop inode/directory
