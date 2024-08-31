@@ -59,7 +59,7 @@ def compare_packages(installed_packages, config_packages, system_packages):
 
 def main():
 
-    config_packages, system_packages = read_config_packages("packages.conf")
+    config_packages, system_packages = read_config_packages("pacman.conf")
     if not config_packages:
         print("Error reading the given packages file.")
         return
