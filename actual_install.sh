@@ -276,3 +276,4 @@ finalize() {
 
 install_yay
 setup_pacman
+copy_config_folders
