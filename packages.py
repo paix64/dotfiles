@@ -20,7 +20,7 @@ def read_config_packages(file_path):
             packages = [
                 line.split()[0].strip()
                 for line in file
-                if line.strip()
+                if line.strip() and not line.startswith("#")
             ]
 
         return packages
