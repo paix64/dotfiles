@@ -1,187 +1,264 @@
 #!/bin/bash
 
+DATE=$(date +%F_%H:%M)
+
 if ! grep -q "arch" /etc/os-release; then
-    echo ":: This script is designed to run on Arch Linux."
-    exit 1
+  echo ":: This script is designed to run on Arch Linux."
+  exit 1
 fi
 
 if [ ! -d "$HOME/dotfiles" ]; then
-    echo ":: The directory $HOME/dotfiles does not exist."
-    exit 1
+  echo ":: The directory $HOME/dotfiles does not exist."
+  exit 1
 fi
 
-ask_continue() {
-    local message=$1
-    local exit_on_no=${2:-true}
-    if gum confirm "$message"; then
-        return 0
-    else
-        echo ":: Skipping $message."
-        if $exit_on_no; then
-            echo ":: Exiting script."
-            exit 0
-        else
-            return 1
-        fi
-    fi
-}
+install_paru() {
+  echo ":: Installing paru..."
+  sleep .4
 
-install_yay() {
-    echo ":: Installing yay..."
-    sudo pacman -Syu --noconfirm
-    sudo pacman -S --needed --noconfirm base-devel git
-    git clone https://aur.archlinux.org/yay.git /tmp/yay
-    cd /tmp/yay
-    makepkg -si --noconfirm --needed
+  sudo pacman -Syu --noconfirm
+  sudo pacman -S --needed --noconfirm base-devel git
+  git clone --depth 1 https://aur.archlinux.org/paru-bin.git /tmp/paru
+  cd /tmp/paru
+  makepkg -si --noconfirm --needed
 }
 
 install_packages() {
-    echo ":: Installing packages"
-    sleep 1
-    yay -Syu --noconfirm --needed
-    yay -S --noconfirm --needed - 
-}
+  echo ":: Installing packages"
+  sleep .4
 
-setup_yay() {
-    if command -v yay &>/dev/null; then
-        echo ":: Yay is installed"
-        sleep 1
-    else
-        echo ":: Yay is not installed!"
-        sleep 1
-        install_yay
-    fi
+  yay -Syu --noconfirm --needed
+  yay -S --needed - <packages.conf
 }
 
 setup_sensors() {
-    sudo sensors-detect --auto >/dev/null
+  echo ":: Setting up sensors"
+  sleep .4
+
+  sudo sensors-detect --auto >/dev/null
 }
 
 check_config_folders() {
-    local CHECK_CONFIG_FOLDERS="ags kitty hypr"
-    local EXIT="NO"
+  echo ":: Checking for existing folders"
+  sleep .4
 
-    for dir in $CHECK_CONFIG_FOLDERS; do
-        if [ -d "$HOME/.config/$dir" ]; then
-            echo ":: Error: directory $dir already exists in .config"
-            EXIT="YES"
-        fi
-    done
+  local CHECK_CONFIG_FOLDERS="kitty hypr fastfetch fish oh-my-posh rofi nvim"
+  local DATETIME=$(date '+%Y-%m-%d %H:%M:%S')
+  local EXISTING="NO"
 
-    if [[ $EXIT == "YES" ]]; then
-        echo ":: Please remove it or make a backup of it"
-        exit 1
+  mkdir -p "$HOME/.backup/$DATETIME/"
+
+  for dir in $CHECK_CONFIG_FOLDERS; do
+    if [ -d "$HOME/.config/$dir" ]; then
+      echo ":: Attention: directory $dir already exists in .config"
+      mv $HOME/.config/$dir "$HOME/.backup/$DATETIME/"
+      EXISTING="YES"
     fi
+  done
+
+  if [[ $EXISTING == "YES" ]]; then
+    echo ":: Old config folder(s) backed up at ~/.backup folder"
+  fi
 }
 
-setup_papirus_icons() {
-    
+rate_mirrors() {
+  echo ":: Rating mirrors"
+  sleep .4
+
+  rate-mirrors --save /tmp/mirrorlist arch
+  sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+  sudo mv /tmp/mirrorlist /etc/pacman.d/mirrorlist
 }
 
-setup_colors() {
-    echo ":: Setting colors"
-    ln -s -f $HOME/dotfiles/wal $HOME/.config/wal
-    python -O $HOME/dotfiles/material-colors/generate.py --color "#0000FF"
-}
+copy_config_folders() {
+  check_config_folders
 
-setup_sddm() {
-    echo ":: Setting SDDM"
-    sudo mkdir -p /etc/sddm.conf.d
-    sudo cp $HOME/dotfiles/sddm/sddm.conf /etc/sddm.conf.d/
-    sudo cp $HOME/dotfiles/sddm/sddm.conf /etc/
-    sudo chmod 777 /etc/sddm.conf.d/sddm.conf
-    sudo chmod 777 /etc/sddm.conf
-    sudo chmod -R 777 /usr/share/sddm/themes/corners/
-    sh $HOME/dotfiles/sddm/scripts/wallpaper.sh
-}
+  echo ":: Creating links"
+  sleep .4
 
-copy_files() {
-    echo ":: Copying files"
-    sh $HOME/dotfiles/setup/copy.sh
-}
-
-create_links() {
-    echo ":: Creating links"
-    if [ -d "$HOME/Pictures/Wallpapers" ]; then
-        echo ":: Error: directory wallpaper already exists in home"
-    else
-        cp -r $HOME/dotfiles/wallpapers $HOME/Pictures/Wallpapers
-    fi
-    
-    ln -s $HOME/dotfiles/ags $HOME/.config/ags
-    ln -s $HOME/dotfiles/alacritty $HOME/.config/kitty
-    ln -s $HOME/dotfiles/hypr $HOME/.config/hypr
-    ln -s $HOME/dotfiles/fish $HOME/.config/fish
-    ln -s $HOME/dotfiles/fastfetch $HOME/.config/fastfetch
-    ln -s $HOME/dotfiles/oh-my-posh $HOME/.config/oh-my-posh
-    ln -s $HOME/dotfiles/localshare/zoxide $HOME/.local/share/
-	ln -s $HOME/dotfiles/rofi $HOME/.config/
-	ln -s $HOME/dotfiles/nvim $HOME/.config/
-}
-
-remove_gtk_buttons() {
-    echo ":: Remove window close and minimize buttons in GTK"
-    gsettings set org.gnome.desktop.wm.preferences button-layout ':'
+  ln -s $HOME/dotfiles/kitty $HOME/.config/
+  ln -s $HOME/dotfiles/hypr $HOME/.config/
+  ln -s $HOME/dotfiles/fish $HOME/.config/
+  ln -s $HOME/dotfiles/fastfetch $HOME/.config/
+  ln -s $HOME/dotfiles/oh-my-posh $HOME/.config/
+  ln -s $HOME/dotfiles/rofi $HOME/.config/
+  ln -s $HOME/dotfiles/nvim $HOME/.config/
+  ln -s $HOME/dotfiles/wlogout $HOME/.config/
+  ln -s $HOME/dotfiles/localshare/zoxide $HOME/.local/share/
+  ln -s $HOME/dotfiles/localshare/fish/fish_history $HOME/.local/share/fish/
+  ln -s $HOME/dotfiles/wezterm $HOME/.config/
 }
 
 setup_services() {
-    echo ":: Services"
+  echo ":: Setting up services"
+  sleep .4
 
-    if systemctl is-active --quiet bluetooth.service; then
-        echo ":: bluetooth.service already running."
-    else
-        sudo systemctl enable --now bluetooth.service
-        echo ":: bluetooth.service activated successfully."
-    fi
+  sudo systemctl enable --now bluetooth.service
+  echo ":: bluetooth.service activated successfully."
 
-    if systemctl is-active --quiet NetworkManager.service; then
-        echo ":: NetworkManager.service already running."
-    else
-        sudo systemctl enable --now NetworkManager.service
-        echo ":: NetworkManager.service activated successfully."
-    fi
+  sudo systemctl enable --now NetworkManager.service
+  echo ":: NetworkManager.service activated successfully."
 }
 
 update_user_dirs() {
-    echo ":: User dirs"
-    xdg-user-dirs-update
+  echo ":: Creating user directories"
+  sleep .4
+
+  xdg-user-dirs-update
 }
 
-misc_tasks() {
-    echo ":: Misc"
-    hyprctl reload
-    ags --init
+setup_fish() {
+  echo ":: Setting up fish"
+  sleep .4
+
+  chsh -s $(which fish)
 }
 
-main() {
-    if [[ $1 == "packages" ]]; then
-        setup_yay
-        install_packages
-        exit 0
-    fi
-    
-    setup_yay
-    
-    if ! command -v gum &>/dev/null; then
-        echo ":: gum not installed"
-        sudo pacman -S gum
-    fi
-    
-    ask_continue "Proceed with installing packages?" false && install_packages
-    ask_continue "Proceed with setting up sensors?" false && setup_sensors
-    ask_continue "Proceed with checking config folders?*" && check_config_folders
-    ask_continue "Proceed with installing Tela Nord icons?" false && install_tela_nord_icons
-    ask_continue "Proceed with setting up colors?*" && setup_colors
-    ask_continue "Proceed with setting up SDDM?" false && setup_sddm
-    ask_continue "Proceed with copying files?*" && copy_files
-    ask_continue "Proceed with creating links?*" && create_links
-    ask_continue "Proceed with removing GTK buttons?" false && remove_gtk_buttons
-    ask_continue "Proceed with setting up services?*" && setup_services
-    ask_continue "Proceed with updating user directories?*" && update_user_dirs
-    ask_continue "Proceed with miscellaneous tasks?*" && misc_tasks
+setup_power_key() {
+  echo ":: Setting up power key"
+  sleep .4
 
-    echo "Please restart your PC"
+  sudo cp /etc/systemd/logind.conf /etc/systemd/logind.conf.bak
+  sudo sed -i 's/^#HandlePowerKey=poweroff/HandlePowerKey=ignore/' /etc/systemd/logind.conf
+
 }
 
-main "$@"
+setup_firewall() {
+  echo ":: Setting up firewall"
+  sleep .4
 
+  systemctl enable --now ufw
+  sudo ufw enable
+  sudo ufw default deny
+  sudo ufw allow from 192.168.0.0/24
+  sudo ufw deny ssh
+}
+
+setup_bun() {
+  echo ":: Setting up bun"
+  sleep .4
+
+  curl -fsSL https://bun.sh/install | bash
+  sudo ln -s $HOME/.bun/bin/bun /usr/local/bin/bun
+  sudo ln -s $HOME/.bun/bin/bunx /usr/local/bin/bunx
+}
+
+setup_electron() {
+  echo -e "--enable-features=UseOzonePlatform\n--ozone-platform=wayland\n--disable-gpu-compositing" >~/.config/electron-flags.conf
+  ln -s ~/.config/electron-flags.conf ~/.config/code-flags.conf
+}
+
+setup_timeshift() {
+  echo ":: Setting up timeshift"
+  sleep .4
+
+  systemctl enable --now cronie
+
+  local ROOT=$(findmnt -no UUID /)
+
+  sudo tee /etc/timeshift/timeshift.json >/dev/null <<EOF
+{
+    "backup_device_uuid" : "$ROOT",
+    "parent_device_uuid" : "",
+    "do_first_run" : "false",
+    "btrfs_mode" : "false",
+    "include_btrfs_home_for_backup" : "false",
+    "include_btrfs_home_for_restore" : "false",
+    "stop_cron_emails" : "true",
+    "schedule_monthly" : "false",
+    "schedule_weekly" : "false",
+    "schedule_daily" : "true",
+    "schedule_hourly" : "true",
+    "schedule_boot" : "true",
+    "count_monthly" : "2",
+    "count_weekly" : "3",
+    "count_daily" : "3",
+    "count_hourly" : "3",
+    "count_boot" : "3",
+    "snapshot_size" : "",
+    "snapshot_count" : "",
+    "date_format" : "%Y-%m-%d %H:%M:%S",
+    "exclude" : [
+      "+ /home/$USER/**",
+      "+ /root/**"
+    ],
+    "exclude-apps" : []
+}
+EOF
+}
+
+setup_rust() {
+  echo ":: Setting up rust"
+  sleep .4
+
+  rustup default stable
+}
+
+install_theme() {
+  echo ":: Installing Themes"
+  sleep .4
+
+  color_scheme="prefer-dark"
+  gtk_theme="Adwaita"
+  icon_theme="Papirus-Dark"
+  cursor_theme="Bibata-Modern-Ice"
+
+  gsettings set org.gnome.desktop.interface color-scheme $color_scheme >/dev/null 2>&1 &
+  gsettings set org.gnome.desktop.interface gtk-theme $gtk_theme >/dev/null 2>&1 &
+  gsettings set org.gnome.desktop.interface icon-theme $icon_theme >/dev/null 2>&1 &
+  gsettings set org.gnome.desktop.interface cursor-theme $cursor_theme >/dev/null 2>&1 &
+  gsettings set org.gnome.desktop.interface font-name "Ubuntu Nerd Font Bold 12" >/dev/null 2>&1 &
+
+  sudo mkdir /etc/sddm.conf.d
+  echo "[Theme]
+Current=sugar-dark" | sudo tee /etc/sddm.conf.d/theme.conf
+
+  local theme_config="/usr/share/sddm/themes/sugar-dark/theme.conf"
+  sudo cp "$theme_config" "${theme_config}_${DATE}.bak"
+  sudo sed -i 's/^ForceHideCompletePassword=false/ForceHideCompletePassword=true/' "$theme_config"
+}
+
+setup_nemo() {
+  echo ":: Setting up nemo"
+  sleep .4
+
+  gsettings set org.cinnamon.desktop.default-applications.terminal exec kitty
+
+}
+
+setup_asusctl() {
+  echo ":: Setting up asusctl"
+  sleep .4
+
+  asusctl -c 80
+
+}
+
+setup_pacman() {
+  echo ":: Setting up pacman"
+  sleep .4
+
+  local pacman_config_file="/etc/pacman.conf"
+  local make_config_file="/etc/makepkg.conf"
+
+  sudo cp "$pacman_config_file" "${pacman_config_file}_${DATE}.bak"
+  sudo cp "$make_config_file" "${make_config_file}_${DATE}.bak"
+
+  sudo sed -i 's/^#Color/Color/' "$pacman_config_file"
+  sudo sed -i 's/^#ParallelDownloads = 5/ParallelDownloads = 3/' "$pacman_config_file"
+
+  sudo sed -i 's/^#MAKEFLAGS="-j2"/MAKEFLAGS="-j8"/' "$make_config_file"
+  sudo sed -i 's/OPTIONS=(strip docs !libtool !staticlibs emptydirs zipman purge debug lto)/OPTIONS=(strip docs !libtool !staticlibs emptydirs zipman purge !debug lto)/' "$make_config_file"
+}
+
+finalize() {
+  echo ":: Finishing installation"
+  sleep .4
+
+  hyprctl reload
+  ags --init
+}
+
+install_paru
+setup_pacman
+copy_config_folders

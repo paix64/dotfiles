@@ -17,51 +17,42 @@ def get_installed_packages():
 def read_config_packages(file_path):
     try:
         with open(file_path, "r") as file:
-            config_packages = [
+            packages = [
                 line.split()[0].strip()
                 for line in file
-                if line.strip() and not line.strip().startswith("#")
+                if line.strip()
             ]
-            file.seek(0)
-            system_packages = [
-                line.split()[0].strip()[2:]
-                for line in file
-                if line.strip().startswith("##")
-            ]
-            file.seek(0)
-            aur_packages = [
-                line.split()[0].strip()
-                for line in file
-                if len(line.split()) == 3 and not line.strip().startswith("#")
-            ]
-            print(f"\n:: AUR packages count: {len(aur_packages)}")
 
-        return config_packages, system_packages
+        return packages
 
     except FileNotFoundError:
         print(f"File not found: {file_path}")
         return []
 
 
-def compare_packages(installed_packages, config_packages, system_packages):
+def compare_packages(installed_packages, pacman_packages, aur_packages):
     installed_set = set(installed_packages)
-    config_set = set(config_packages)
-    system_set = set(system_packages)
+    pacman_set = set(pacman_packages)
+    aur_set = set(aur_packages)
 
-    blacklist = ["#", "pipewire"]  # remove unwanted
-    config_set = config_set - set(blacklist)
+    blacklist = []  # remove unwanted
+    pacman_set = pacman_set - set(blacklist)
 
-    not_in_config = installed_set - config_set - system_set
-    not_installed = config_set - installed_set
+    not_in_config = installed_set - pacman_set - aur_set
+    not_installed = pacman_set.union(aur_set).difference(installed_set)
 
     return not_in_config, not_installed
 
 
 def main():
+    pacman_packages = read_config_packages("pacman.conf")
+    if not pacman_packages:
+        print("Error reading the given pacman package file.")
+        return
 
-    config_packages, system_packages = read_config_packages("pacman.conf")
-    if not config_packages:
-        print("Error reading the given packages file.")
+    aur_packages = read_config_packages("aur.conf")
+    if not aur_packages:
+        print("Error reading the given aur package file.")
         return
 
     installed_packages = get_installed_packages()
@@ -70,13 +61,15 @@ def main():
         return
 
     not_in_given, not_installed = compare_packages(
-        installed_packages, config_packages, system_packages
+        installed_packages, pacman_packages, aur_packages
     )
 
     all_in_config = False
     all_config_installed = False
 
     print(f":: {len(installed_packages)} packages are installed.")
+    print(f":: {len(aur_packages)} AUR packages installed.")
+    
     if not_in_given:
         print(f"> Packages that are not in config:")
         for pkg in not_in_given:
@@ -94,7 +87,7 @@ def main():
     if all_config_installed and all_in_config:
         print(">> All packages are up to date")
     elif all_in_config:
-        print("> All installed packages are in the packages.conf.")
+        print("> All installed packages are in config.")
     elif all_config_installed:
         print("> All config packages are installed.")
 
