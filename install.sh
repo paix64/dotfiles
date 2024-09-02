@@ -12,14 +12,19 @@ if [ ! -d "$HOME/dotfiles" ]; then
   exit 1
 fi
 
-install_paru() {
-  echo ":: Installing paru..."
+install_yay() {
+  if command -v yay &>/dev/null; then
+    echo ":: Yay is installed"
+  else
+    echo ":: Installing yay..."
+  fi
+
   sleep .4
 
   sudo pacman -Syu --noconfirm
   sudo pacman -S --needed --noconfirm base-devel git
-  git clone --depth 1 https://aur.archlinux.org/paru-bin.git /tmp/paru
-  cd /tmp/paru
+  git clone --depth 1 https://aur.archlinux.org/yay-bin.git /tmp/yay
+  cd /tmp/yay
   makepkg -si --noconfirm --needed
 }
 
@@ -259,6 +264,6 @@ finalize() {
   ags --init
 }
 
-install_paru
+install_yay
 setup_pacman
 copy_config_folders
