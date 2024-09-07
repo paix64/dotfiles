@@ -256,6 +256,15 @@ setup_pacman() {
   sudo sed -i 's/OPTIONS=(strip docs !libtool !staticlibs emptydirs zipman purge debug lto)/OPTIONS=(strip docs !libtool !staticlibs emptydirs zipman purge !debug lto)/' "$make_config_file"
 }
 
+debloat_archinstall() {
+  sudo pacman -Rns dunst dolphin \
+    wofi polkit-kde-agent xorg-xinit \
+    htop
+
+  sudo pacman -S --dbonly --asdeps qt6-wayland \
+    grim slurp xorg-server libpulse xdg-utils
+}
+
 finalize() {
   echo ":: Finishing installation"
   sleep .4

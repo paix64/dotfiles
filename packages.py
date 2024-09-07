@@ -31,14 +31,19 @@ def read_config_packages(file_path):
 
 
 def compare_packages(installed_packages, pacman_packages, aur_packages):
-    installed_set = set(installed_packages)
-    pacman_set = set(pacman_packages)
     aur_set = set(aur_packages)
+    pacman_set = set(pacman_packages)
 
-    blacklist = []  # remove unwanted
-    pacman_set = pacman_set - set(blacklist)
+    installed_set = set([pkg for pkg in installed_packages if not pkg.startswith("cosmic-")])
+    
+    blacklist = ["linux", "linux-firmware", "linux-headers", "efibootmgr", "base",
+                 "base-devel", "intel-ucode", "networkmanager",
+                 "network-manager-applet", "nano", "vim", "sof-firmware", "pipewire",
+                 "dkms", "nvidia-open-dkms", "hyprland", "wget"]
+    
 
-    not_in_config = installed_set - pacman_set - aur_set
+    blacklist_set = set(blacklist)
+    not_in_config = installed_set - pacman_set - aur_set - blacklist_set
     not_installed = pacman_set.union(aur_set).difference(installed_set)
 
     return not_in_config, not_installed
