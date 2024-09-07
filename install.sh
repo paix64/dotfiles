@@ -213,14 +213,6 @@ install_theme() {
   gsettings set org.gnome.desktop.interface icon-theme $icon_theme >/dev/null 2>&1 &
   gsettings set org.gnome.desktop.interface cursor-theme $cursor_theme >/dev/null 2>&1 &
   gsettings set org.gnome.desktop.interface font-name "Ubuntu Nerd Font Bold 12" >/dev/null 2>&1 &
-
-  sudo mkdir /etc/sddm.conf.d
-  echo "[Theme]
-Current=sugar-dark" | sudo tee /etc/sddm.conf.d/theme.conf
-
-  local theme_config="/usr/share/sddm/themes/sugar-dark/theme.conf"
-  sudo cp "$theme_config" "${theme_config}_${DATE}.bak"
-  sudo sed -i 's/^ForceHideCompletePassword=false/ForceHideCompletePassword=true/' "$theme_config"
 }
 
 setup_nemo() {
@@ -259,7 +251,7 @@ setup_pacman() {
 debloat_archinstall() {
   sudo pacman -Rns dunst dolphin \
     wofi polkit-kde-agent xorg-xinit \
-    htop
+    htop smartmontools wireless_tools
 
   sudo pacman -S --dbonly --asdeps qt6-wayland \
     grim slurp xorg-server libpulse xdg-utils
