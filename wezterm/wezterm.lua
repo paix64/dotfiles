@@ -4,7 +4,7 @@ local bar = require("bar")
 
 local config = {
 	initial_cols = 80,
-	initial_rows = 24,
+	initial_rows = 25,
 
 	window_padding = {
 		top = 10,

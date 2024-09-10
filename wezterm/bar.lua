@@ -174,13 +174,13 @@ M.apply_to_config = function(c, opts)
 	local scheme = wez.color.get_builtin_schemes()[c.color_scheme]
 	local default_colors = {
 		tab_bar = {
-			background = "rgba(0 0 0 0.65)",
+			background = "rgba(0 0 0 0.55)",
 			active_tab = {
-				bg_color = "rgba(0 0 0 0.65)",
+				bg_color = "rgba(0 0 0 0.55)",
 				fg_color = scheme.ansi[config.ansi_colors.active_tab],
 			},
 			inactive_tab = {
-				bg_color = "rgba(0 0 0 0.65)",
+				bg_color = "rgba(0 0 0 0.55)",
 				fg_color = scheme.ansi[config.ansi_colors.inactive_tab],
 			},
 		},
