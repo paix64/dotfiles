@@ -4,7 +4,7 @@ local bar = require("bar")
 
 local config = {
 	initial_cols = 64,
-	initial_rows = 22,
+	initial_rows = 24,
 
 	window_padding = {
 		top = 10,
@@ -24,7 +24,6 @@ local config = {
 	cursor_blink_ease_out = "Constant",
 	color_scheme = "Gruvbox dark, hard (base16)",
 	selection_word_boundary = "\t\n{}[]()\"'`-/.,;:❯ ",
-	line_height = 0.90,
 	hide_tab_bar_if_only_one_tab = true,
 	show_new_tab_button_in_tab_bar = false,
 	colors = {
