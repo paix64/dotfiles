@@ -3,7 +3,7 @@ local act = wezterm.action
 local bar = require("bar")
 
 local config = {
-	initial_cols = 64,
+	initial_cols = 80,
 	initial_rows = 24,
 
 	window_padding = {
