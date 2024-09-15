@@ -2,13 +2,21 @@
 
 DATE=$(date +%F_%H:%M)
 
+RED="\u001b[31m"
+GREEN="\u001b[32m"
+YELLOW="\u001b[33m"
+BLUE="\u001b[34m"
+MAGENTA="\u001b[35m"
+CYAN="\u001b[36m"
+ESC="\u001b[0m"
+
 if ! grep -q "arch" /etc/os-release; then
-  echo ":: This script is designed to run on Arch Linux."
+  echo -e "$BLUE::$ESC This script is designed to run on$BLUE Arch Linux. $ESC"
   exit 1
 fi
 
 if [ ! -d "$HOME/dotfiles" ]; then
-  echo ":: The directory $HOME/dotfiles does not exist."
+  echo -e "$BLUE::$ESC The directory $YELLOW$HOME/dotfiles$ESC$RED does not exist. $ESC"
   exit 1
 fi
 
@@ -32,7 +40,7 @@ install_packages() {
   echo ":: Installing packages"
   sleep .4
 
-  yay -Syu --noconfirm --needed
+  yay -Syu --noconfirm
   yay -S --needed - <packages.conf
 }
 
@@ -75,7 +83,7 @@ rate_mirrors() {
   sudo mv /tmp/mirrorlist /etc/pacman.d/mirrorlist
 }
 
-copy_config_folders() {
+link_config_folders() {
   check_config_folders
 
   echo ":: Creating links"
@@ -90,22 +98,10 @@ copy_config_folders() {
   ln -s $HOME/dotfiles/nvim $HOME/.config/
   ln -s $HOME/dotfiles/wlogout $HOME/.config/
   ln -s $HOME/dotfiles/localshare/zoxide $HOME/.local/share/
-  ln -s $HOME/dotfiles/localshare/fish/fish_history $HOME/.local/share/fish/
   ln -s $HOME/dotfiles/wezterm $HOME/.config/
 }
 
-setup_services() {
-  echo ":: Setting up services"
-  sleep .4
-
-  sudo systemctl enable --now bluetooth.service
-  echo ":: bluetooth.service activated successfully."
-
-  sudo systemctl enable --now NetworkManager.service
-  echo ":: NetworkManager.service activated successfully."
-}
-
-update_user_dirs() {
+setup_user_dirs() {
   echo ":: Creating user directories"
   sleep .4
 
@@ -125,7 +121,6 @@ setup_power_key() {
 
   sudo cp /etc/systemd/logind.conf /etc/systemd/logind.conf.bak
   sudo sed -i 's/^#HandlePowerKey=poweroff/HandlePowerKey=ignore/' /etc/systemd/logind.conf
-
 }
 
 setup_firewall() {
@@ -149,6 +144,7 @@ setup_bun() {
 }
 
 setup_electron() {
+  echo ":: Setting up electron"
   echo -e "--enable-features=UseOzonePlatform\n--ozone-platform=wayland\n--disable-gpu-compositing" >~/.config/electron-flags.conf
   ln -s ~/.config/electron-flags.conf ~/.config/code-flags.conf
 }
@@ -200,7 +196,7 @@ setup_rust() {
 }
 
 install_theme() {
-  echo ":: Installing Themes"
+  echo ":: Installing themes"
   sleep .4
 
   color_scheme="prefer-dark"
@@ -220,7 +216,6 @@ setup_nemo() {
   sleep .4
 
   gsettings set org.cinnamon.desktop.default-applications.terminal exec kitty
-
 }
 
 setup_asusctl() {
@@ -228,7 +223,6 @@ setup_asusctl() {
   sleep .4
 
   asusctl -c 80
-
 }
 
 setup_pacman() {
@@ -236,25 +230,40 @@ setup_pacman() {
   sleep .4
 
   local pacman_config_file="/etc/pacman.conf"
-  local make_config_file="/etc/makepkg.conf"
+  local makepkg_config_file="/etc/makepkg.conf"
 
+  # Backup before changing anything.
   sudo cp "$pacman_config_file" "${pacman_config_file}_${DATE}.bak"
-  sudo cp "$make_config_file" "${make_config_file}_${DATE}.bak"
+  sudo cp "$makepkg_config_file" "${makepkg_config_file}_${DATE}.bak"
 
+  # Enables Color and ParallelDownloads options.
   sudo sed -i 's/^#Color/Color/' "$pacman_config_file"
-  sudo sed -i 's/^#ParallelDownloads = 5/ParallelDownloads = 3/' "$pacman_config_file"
+  sudo sed -i 's/^#ParallelDownloads = 5/ParallelDownloads = 5/' "$pacman_config_file"
 
-  sudo sed -i 's/^#MAKEFLAGS="-j2"/MAKEFLAGS="-j8"/' "$make_config_file"
-  sudo sed -i 's/OPTIONS=(strip docs !libtool !staticlibs emptydirs zipman purge debug lto)/OPTIONS=(strip docs !libtool !staticlibs emptydirs zipman purge !debug lto)/' "$make_config_file"
+  # Change AUR build threads to 8. Faster builds on AUR.
+  sudo sed -i 's/^#MAKEFLAGS="-j2"/MAKEFLAGS="-j8"/' "$makepkg_config_file"
+  
+  # Change debug to !debug in OPTIONS. Removes debug packages of AUR installs.
+  sudo sed -i 's/OPTIONS=(strip docs !libtool !staticlibs emptydirs zipman purge debug lto)/ \
+  OPTIONS=(strip docs !libtool !staticlibs emptydirs zipman purge !debug lto)/' "$makepkg_config_file"
 }
 
 debloat_archinstall() {
+  echo ":: Debloating archinstall"
   sudo pacman -Rns dunst dolphin \
     wofi polkit-kde-agent xorg-xinit \
     htop smartmontools wireless_tools
 
   sudo pacman -S --dbonly --asdeps qt6-wayland \
     grim slurp xorg-server libpulse xdg-utils
+}
+
+setup_services() {
+  echo ":: Setting up services"
+  sleep .4
+
+  sudo systemctl enable --now bluetooth.service
+  sudo systemctl enable --now NetworkManager.service
 }
 
 finalize() {
@@ -265,6 +274,38 @@ finalize() {
   ags --init
 }
 
-install_yay
-setup_pacman
-copy_config_folders
+if [[ "$1" == "--install" ]]; then
+  debloat_archinstall
+  setup_pacman
+  
+  install_yay
+  rate_mirrors
+  install_packages
+  install_theme
+  
+  link_config_folders
+
+  setup_sensors
+  setup_user_dirs
+  setup_asusctl
+  setup_rust
+  setup_nemo
+  setup_timeshift
+  setup_fish
+  setup_power_key
+  setup_firewall
+  setup_bun
+  setup_electron
+  setup_services
+  
+  finalize
+  
+elif [[ "$1" == "--rate" ]]; then
+  rate_mirrors
+elif [[ "$1" == "--link" ]]; then
+  link_config_folders
+fi
+
+
+
+
