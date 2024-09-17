@@ -13,7 +13,7 @@
   "bar.workspaces.numbered_active_indicator": "underline",
   "bar.media.show_artist": true,
   "bar.customModules.updates.pollingInterval": 1440000,
-  "menus.dashboard.powermenu.avatar.image": "/home/burak/Documents/pp.png",
+  "menus.dashboard.powermenu.avatar.image": "/home/burak/Documents/pp.jpg",
   "menus.power.showLabel": true,
   "theme.bar.transparent": false,
   "theme.bar.opacity": 55,
@@ -95,5 +95,13 @@
   "theme.bar.buttons.media.spacing": "0.5em",
   "bar.media.truncation_size": 60,
   "bar.notifications.show_total": false,
-  "theme.bar.buttons.notifications.spacing": "0.5em"
+  "theme.bar.buttons.notifications.spacing": "0.5em",
+  "theme.notification.border_radius": "0.6em",
+  "theme.osd.orientation": "vertical",
+  "theme.osd.duration": 2500,
+  "theme.osd.radius": "0.8em",
+  "theme.osd.margins": "0px 16px 0px 0px",
+  "menus.clock.weather.unit": "metric",
+  "theme.bar.menus.menu.dashboard.profile.radius": "100em",
+  "theme.bar.menus.menu.dashboard.profile.size": "8.5em"
 }
