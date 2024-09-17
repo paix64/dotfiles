@@ -108,6 +108,14 @@ setup_user_dirs() {
   xdg-user-dirs-update
 }
 
+setup_virtual_network(){
+  echo ":: Setting up virtual network"
+  sleep .4
+
+  sudo systemctl enable --now libvirtd.socket
+  sudo virsh net-autostart default
+}
+
 setup_fish() {
   echo ":: Setting up fish"
   sleep .4
@@ -297,6 +305,7 @@ if [[ "$1" == "--install" ]]; then
   setup_bun
   setup_electron
   setup_services
+  setup_virtual_network
   
   finalize
   
@@ -305,7 +314,3 @@ elif [[ "$1" == "--rate" ]]; then
 elif [[ "$1" == "--link" ]]; then
   link_config_folders
 fi
-
-
-
-
