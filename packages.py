@@ -37,9 +37,9 @@ def compare_packages(installed_packages, pacman_packages, aur_packages):
     installed_set = set([pkg for pkg in installed_packages if not pkg.startswith("cosmic-")])
     
     blacklist = ["linux", "linux-firmware", "linux-headers", "efibootmgr", "base",
-                 "base-devel", "intel-ucode", "networkmanager",
-                 "network-manager-applet", "nano", "vim", "sof-firmware", "pipewire",
-                 "dkms", "nvidia-open-dkms", "hyprland", "wget"]
+                "base-devel", "intel-ucode", "networkmanager",
+                "network-manager-applet", "nano", "vim", "sof-firmware", "pipewire",
+                "dkms", "nvidia-open-dkms", "hyprland", "wget"]
     
 
     blacklist_set = set(blacklist)

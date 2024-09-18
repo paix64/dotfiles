@@ -47,3 +47,5 @@ fzf --fish | source
 
 # Set up oh-my-posh
 oh-my-posh init fish -c ~/.config/oh-my-posh/zen.toml | source
+
+set fish_greeting ""
