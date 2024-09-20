@@ -139,6 +139,7 @@ setup_firewall() {
   sudo ufw enable
   sudo ufw default deny
   sudo ufw allow from 192.168.0.0/24
+  sudo ufw allow from 192.168.122.0/24  # virtual network
   sudo ufw deny ssh
 }
 

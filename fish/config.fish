@@ -27,6 +27,7 @@ alias gp="git push"
 alias gl="git log"
 alias gpu="git pull"
 alias gr="git restore"
+alias gcl="git clone"
 
 alias m="micro"
 alias cat="bat"
