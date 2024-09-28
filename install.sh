@@ -314,4 +314,6 @@ elif [[ "$1" == "--rate" ]]; then
   rate_mirrors
 elif [[ "$1" == "--link" ]]; then
   link_config_folders
+elif [[ "$1" == "--yay" ]]; then
+  install_yay
 fi
