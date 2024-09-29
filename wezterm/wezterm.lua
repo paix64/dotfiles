@@ -7,9 +7,9 @@ local config = {
 	initial_rows = 25,
 
 	window_padding = {
-		top = 10,
-		left = 10,
-		right = 10,
+		top = "1cell",
+		left = "1cell",
+		right = "1cell",
 		bottom = 0,
 	},
 
