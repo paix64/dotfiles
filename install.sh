@@ -275,6 +275,13 @@ setup_services() {
   sudo systemctl enable --now NetworkManager.service
 }
 
+install_gnome() {
+  sudo pacman -Syu
+  sudo pacman -S --noconfirm --needed gnome
+  sudo pacman -R gnome-tour gnome-maps gnome-weather \
+                gnome-font-viewer
+}
+
 finalize() {
   echo ":: Finishing installation"
   sleep .4
