@@ -282,6 +282,10 @@ install_gnome() {
                 gnome-font-viewer
 }
 
+setup_hotspot() {
+  systemctl enable create_ap
+}
+
 finalize() {
   echo ":: Finishing installation"
   sleep .4
@@ -314,6 +318,7 @@ if [[ "$1" == "--install" ]]; then
   setup_electron
   setup_services
   setup_virtual_network
+  setup_hotspot
   
   finalize
   
@@ -323,4 +328,5 @@ elif [[ "$1" == "--link" ]]; then
   link_config_folders
 elif [[ "$1" == "--yay" ]]; then
   install_yay
+
 fi
