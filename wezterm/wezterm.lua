@@ -7,10 +7,10 @@ local config = {
 	initial_rows = 25,
 
 	window_padding = {
-		top = "1cell",
+		top = "0.5cell",
 		left = "1cell",
 		right = "1cell",
-		bottom = 0,
+		bottom = "0.5cell",
 	},
 
 	window_background_opacity = 0.60,
