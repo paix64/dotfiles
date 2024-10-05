@@ -34,7 +34,7 @@ def compare_packages(installed_packages, pacman_packages, aur_packages):
     aur_set = set(aur_packages)
     pacman_set = set(pacman_packages)
 
-    installed_set = set([pkg for pkg in installed_packages if not pkg.startswith("cosmic-")])
+    installed_set = set([pkg for pkg in installed_packages if not (pkg.startswith("cosmic-") or pkg.startswith("gvfs"))])
     
     blacklist = ["linux", "linux-firmware", "linux-headers", "efibootmgr", "base",
                 "base-devel", "intel-ucode", "networkmanager",

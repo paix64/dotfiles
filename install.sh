@@ -259,11 +259,13 @@ setup_pacman() {
 
 debloat_archinstall() {
   echo ":: Debloating archinstall"
-  sudo pacman -Rns dunst dolphin \
-    wofi polkit-kde-agent xorg-xinit \
-    htop smartmontools wireless_tools
+  sudo pacman -Rns \
+    dunst dolphin wofi polkit-kde-agent \
+    xorg-xinit htop smartmontools \
+    wireless_tools
 
-  sudo pacman -S --dbonly --asdeps qt6-wayland \
+  sudo pacman -S --dbonly --asdeps \
+    qt6-wayland qt5-wayland \
     grim slurp xorg-server libpulse xdg-utils
 }
 
@@ -278,8 +280,17 @@ setup_services() {
 install_gnome() {
   sudo pacman -Syu
   sudo pacman -S --noconfirm --needed gnome
-  sudo pacman -R gnome-tour gnome-maps gnome-weather \
-                gnome-font-viewer
+  sudo pacman -S --dbonly --asdeps \
+    tecla gnome-color-manager gnome-keyring \
+    gst-plugin-pipewire grilo-plugins \
+    gnome-settings-daemon
+  sudo pacman -Rns \
+    gnome-tour gnome-maps gnome-weather \
+    gnome-font-viewer gnome-remote-desktop \
+    simple-scan totem orca gnome-user-docs \
+    yelp gnome-logs epiphany gnome-contacts \
+    gnome-menus malcontent rygel gnome-connections \
+    gnome-user-share
 }
 
 setup_hotspot() {
