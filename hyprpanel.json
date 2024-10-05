@@ -21,7 +21,7 @@
   "theme.osd.monitor": 0,
   "theme.bar.buttons.opacity": 100,
   "theme.bar.buttons.background_opacity": 50,
-  "theme.bar.buttons.background_hover_opacity": 50,
+  "theme.bar.buttons.background_hover_opacity": 75,
   "bar.layouts": {
     "0": {
       "left": [
@@ -124,5 +124,6 @@
   "bar.media.truncation": true,
   "bar.bluetooth.label": false,
   "bar.media.rightClick": "playerctl play-pause",
-  "bar.network.label": false
+  "bar.network.label": false,
+  "menus.clock.weather.enabled": false
 }
