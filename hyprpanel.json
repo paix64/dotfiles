@@ -26,10 +26,11 @@
     "0": {
       "left": [
         "dashboard",
-        "workspaces"
+        "workspaces",
+        "media"
       ],
       "middle": [
-        "media"
+        "clock"
       ],
       "right": [
         "volume",
@@ -37,7 +38,6 @@
         "bluetooth",
         "battery",
         "systray",
-        "clock",
         "notifications"
       ]
     }
@@ -73,7 +73,7 @@
   "bar.windowtitle.truncation": true,
   "bar.windowtitle.truncation_size": 20,
   "bar.volume.label": true,
-  "bar.clock.showIcon": true,
+  "bar.clock.showIcon": false,
   "notifications.monitor": 0,
   "bar.workspaces.icons.occupied": "",
   "bar.workspaces.icons.available": "",
@@ -92,7 +92,7 @@
   "theme.bar.buttons.network.spacing": "0.3em",
   "theme.bar.buttons.clock.spacing": "0.3em",
   "theme.bar.buttons.media.spacing": "0.5em",
-  "bar.media.truncation_size": 60,
+  "bar.media.truncation_size": 42,
   "bar.notifications.show_total": false,
   "theme.bar.buttons.notifications.spacing": "0.5em",
   "theme.notification.border_radius": "0.6em",
