@@ -297,6 +297,13 @@ setup_hotspot() {
   systemctl enable create_ap
 }
 
+setup_autologin() {
+  sudo mkdir -p /etc/sddm.conf.d
+  sudo echo -e "[Autologin]\nUser=$USER\nSession=hyprland" \
+    > /tmp/autologin.conf
+  sudo cp /tmp/autologin.conf /etc/sddm.conf.d/
+}
+
 finalize() {
   echo ":: Finishing installation"
   sleep .4
@@ -339,5 +346,6 @@ elif [[ "$1" == "--link" ]]; then
   link_config_folders
 elif [[ "$1" == "--yay" ]]; then
   install_yay
-
+elif [[ "$1" == "--autologin" ]]; then
+  setup_autologin
 fi
