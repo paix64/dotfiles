@@ -293,7 +293,11 @@ install_gnome() {
     gnome-user-share
   cd /usr/share/wayland-sessions  
   sudo rm -f gnome-classic-wayland.desktop \
-  gnome-classic.desktop gnome-wayland.desktop
+      gnome-classic.desktop gnome-wayland.desktop
+  cd /usr/share/xsessions
+  sudo rm -f gnome-classic-xorg.desktop \
+      gnome-classic.desktop gnome-xorg.desktop \
+      gnome.desktop
 }
 
 setup_hotspot() {
