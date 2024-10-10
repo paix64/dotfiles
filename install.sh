@@ -291,6 +291,9 @@ install_gnome() {
     yelp gnome-logs epiphany gnome-contacts \
     gnome-menus malcontent rygel gnome-connections \
     gnome-user-share
+  cd /usr/share/wayland-sessions  
+  sudo rm -f gnome-classic-wayland.desktop \
+  gnome-classic.desktop gnome-wayland.desktop
 }
 
 setup_hotspot() {
