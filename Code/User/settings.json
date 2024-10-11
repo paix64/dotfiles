@@ -20,4 +20,6 @@
   "window.customTitleBarVisibility": "auto",
   "workbench.activityBar.location": "top",
   "workbench.layoutControl.enabled": false,
+  "terminal.integrated.env.linux": {},
+  "console-ninja.featureSet": "Community",
 }

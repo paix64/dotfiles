@@ -15,4 +15,8 @@
         "command": "inlineChat.start",
         "when": "editorFocus && inlineChatHasProvider && !editorReadonly"
     },
+    {
+        "key": "ctrl+h",
+        "command": "workbench.action.openWalkthrough"
+    },
 ]
