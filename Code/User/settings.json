@@ -1,0 +1,23 @@
+{
+  "editor.fontFamily": "'JetBrainsMono Nerd Font', 'monospace'",
+  "window.zoomLevel": 2,
+  "workbench.colorTheme": "Gruvbox Dark Hard",
+  "workbench.iconTheme": "material-icon-theme",
+  "files.autoSave": "afterDelay",
+  "nix.enableLanguageServer": true,
+  "editor.formatOnSave": true,
+  "git.confirmSync": false,
+  "explorer.confirmDelete": false,
+  "git.suggestSmartCommit": false,
+  "settingsSync.ignoredSettings": [
+    "-window.zoomLevel"
+  ],
+  "terminal.integrated.fontSize": 12,
+  "security.workspace.trust.untrustedFiles": "open",
+  "git.openRepositoryInParentFolders": "always",
+  "editor.minimap.autohide": true,
+  "window.menuBarVisibility": "toggle",
+  "window.customTitleBarVisibility": "auto",
+  "workbench.activityBar.location": "top",
+  "workbench.layoutControl.enabled": false,
+}

@@ -1,5 +1,10 @@
-micro/buffers
-fish/fish_variables
-fish/conf.d
-fish/completions
-fish/functions
+micro/*
+!micro/bindings.json
+!micro/settings.json
+
+fish/*
+!fish/config.fish
+
+Code/User/*
+!Code/User/keybindings.json
+!Code/User/settings.json
