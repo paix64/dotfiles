@@ -95,10 +95,10 @@ link_config_folders() {
   ln -s $HOME/dotfiles/fastfetch $HOME/.config/
   ln -s $HOME/dotfiles/oh-my-posh $HOME/.config/
   ln -s $HOME/dotfiles/rofi $HOME/.config/
-  ln -s $HOME/dotfiles/nvim $HOME/.config/
   ln -s $HOME/dotfiles/wlogout $HOME/.config/
   ln -s $HOME/dotfiles/localshare/zoxide $HOME/.local/share/
   ln -s $HOME/dotfiles/wezterm $HOME/.config/
+  ln -s $HOME/dotfiles/Code/User $HOME/.config/Code/
 }
 
 setup_user_dirs() {
