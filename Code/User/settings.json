@@ -22,4 +22,11 @@
   "workbench.layoutControl.enabled": false,
   "terminal.integrated.env.linux": {},
   "console-ninja.featureSet": "Community",
+  "cSpell.ignoreWords": [
+    "reqwest",
+    "tauri",
+    "walkdir",
+    "bupl",
+    "flac"
+  ],
 }
