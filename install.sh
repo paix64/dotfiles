@@ -311,6 +311,13 @@ setup_autologin() {
   sudo cp /tmp/autologin.conf /etc/sddm.conf.d/
 }
 
+backup_flatpak() {
+  echo ":: Backing up flatpak applications"
+  sleep .4
+
+  flatpak list --app --columns=application >flatpaks.conf
+}
+
 finalize() {
   echo ":: Finishing installation"
   sleep .4
@@ -355,4 +362,6 @@ elif [[ "$1" == "--yay" ]]; then
   install_yay
 elif [[ "$1" == "--autologin" ]]; then
   setup_autologin
+elif [[ "$1" == "--flatpak" ]]; then
+  backup_flatpak  
 fi
