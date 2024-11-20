@@ -1,9 +1,20 @@
-#!/bin/bash
+#!/bin/env bash
 
-TEMP=$(busctl --user -- get-property rs.wl-gammarelay /outputs/eDP_1 rs.wl.gammarelay Temperature | awk '{print $2}')
+STATUS_FILE="$XDG_RUNTIME_DIR/night-light.status"
 
-if [ "$TEMP" -eq 6500 ]; then
-    busctl --user set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q 3500
-else
-    busctl --user set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q 6500
+if [ ! -f "$STATUS_FILE" ]; then
+    echo "FALSE" > "$STATUS_FILE"
 fi
+
+TOGGLE=$(cat "$STATUS_FILE")
+
+pkill -x hyprsunset 2>/dev/null
+
+if [ "$TOGGLE" = "FALSE" ]; then
+    hyprsunset -t 3500 &
+    echo "TRUE" > "$STATUS_FILE"
+else
+    hyprsunset -t 6500 &
+    echo "FALSE" > "$STATUS_FILE"
+fi
+
