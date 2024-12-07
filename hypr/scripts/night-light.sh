@@ -11,7 +11,7 @@ TOGGLE=$(cat "$STATUS_FILE")
 pkill -x hyprsunset 2>/dev/null
 
 if [ "$TOGGLE" = "FALSE" ]; then
-    hyprsunset -t 3500 &
+    hyprsunset -t 4000 &
     echo "TRUE" > "$STATUS_FILE"
 else
     hyprsunset -t 6500 &
