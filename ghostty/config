@@ -1,0 +1,34 @@
+theme = GruvboxDarkHard
+
+window-decoration = false
+window-height = 20
+window-width = 70
+
+window-padding-x = 10
+window-padding-y = 0
+window-padding-balance = true
+window-padding-color = extend
+
+window-inherit-working-directory = true
+
+shell-integration = fish
+bold-is-bright = false
+
+background = #090909
+background-opacity = .6
+background-blur-radius = 20
+
+font-family = "Jetbrains Mono Nerd Font"
+font-size = 16
+font-style = SemiBold
+
+shell-integration-features = no-cursor
+cursor-style = block
+cursor-invert-fg-bg = true
+
+mouse-scroll-multiplier = 2
+
+keybind = ctrl+alt+r=reload_config
+keybind = f1=new_tab
+keybind = ctrl+w=close_surface
+keybind = ctrl+alt+a=toggle_window_decorations
