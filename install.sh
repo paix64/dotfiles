@@ -212,12 +212,14 @@ install_theme() {
   gtk_theme="Adwaita"
   icon_theme="Papirus-Dark"
   cursor_theme="Bibata-Modern-Ice"
-
+  cursor_size=32
+  
   gsettings set org.gnome.desktop.interface color-scheme $color_scheme >/dev/null 2>&1 &
   gsettings set org.gnome.desktop.interface gtk-theme $gtk_theme >/dev/null 2>&1 &
   gsettings set org.gnome.desktop.interface icon-theme $icon_theme >/dev/null 2>&1 &
   gsettings set org.gnome.desktop.interface cursor-theme $cursor_theme >/dev/null 2>&1 &
-  gsettings set org.gnome.desktop.interface font-name "Ubuntu Nerd Font Bold 12" >/dev/null 2>&1 &
+  gsettings set org.gnome.desktop.interface cursor-size $cursor_size
+  gsettings set org.gnome.desktop.interface font-name "Google Sans Medium 14" >/dev/null 2>&1 &
 }
 
 setup_nemo() {
