@@ -90,7 +90,9 @@ link_config_folders() {
   sleep .4
 
   ln -s $HOME/dotfiles/kitty $HOME/.config/
+  ln -s $HOME/dotfiles/ghostty $HOME/.config/
   ln -s $HOME/dotfiles/hypr $HOME/.config/
+  ln -s $HOME/dotfiles/niri $HOME/.config/
   ln -s $HOME/dotfiles/fish $HOME/.config/
   ln -s $HOME/dotfiles/fastfetch $HOME/.config/
   ln -s $HOME/dotfiles/oh-my-posh $HOME/.config/
