@@ -210,8 +210,12 @@ install_theme() {
   echo ":: Installing themes"
   sleep .4
 
+  git clone https://github.com/vinceliuice/Graphite-gtk-theme.git \
+  /tmp/Graphite
+  /tmp/Graphite/install.sh -c dark --tweaks normal black -l
+  
   color_scheme="prefer-dark"
-  gtk_theme="Adwaita"
+  gtk_theme="Graphite-Dark"
   icon_theme="Papirus-Dark"
   cursor_theme="Bibata-Modern-Ice"
   cursor_size=32
