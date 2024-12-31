@@ -1,4 +1,4 @@
-theme = GruvboxDarkHard
+theme = /home/burak/.cache/wal/colors-ghostty.conf
 
 window-decoration = false
 window-height = 20
@@ -15,7 +15,7 @@ shell-integration = fish
 bold-is-bright = false
 
 background = #090909
-background-opacity = .6
+background-opacity = .75
 background-blur-radius = 20
 
 font-family = "Jetbrains Mono Nerd Font"
