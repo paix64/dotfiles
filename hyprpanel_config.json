@@ -1,6 +1,6 @@
 {
   "bar.customModules.updates.pollingInterval": 1440000,
-  "theme.font.size": "1.2rem",
+  "theme.font.size": "1.0rem",
   "menus.clock.time.military": true,
   "terminal": "kitty",
   "bar.clock.format": "%a %b %d %H:%M",
@@ -27,10 +27,10 @@
       "left": [
         "dashboard",
         "workspaces",
-        "media"
+        "clock"
       ],
       "middle": [
-        "clock"
+        "media"
       ],
       "right": [
         "volume",
@@ -49,11 +49,11 @@
   "theme.bar.buttons.modules.updates.spacing": "0.45em",
   "bar.customModules.power.icon": "",
   "bar.customModules.weather.unit": "imperial",
-  "theme.bar.layer": "background",
+  "theme.bar.layer": "top",
   "theme.bar.menus.menu.notifications.height": "40rem",
   "notifications.displayedTotal": 4,
-  "theme.font.weight": 700,
-  "theme.font.name": "JetBrainsMono Nerd Font",
+  "theme.font.weight": 600,
+  "theme.font.name": "Google Sans Medium",
   "theme.bar.buttons.monochrome": false,
   "theme.osd.opacity": 60,
   "bar.customModules.ram.round": true,
@@ -125,5 +125,17 @@
   "bar.bluetooth.label": false,
   "bar.media.rightClick": "playerctl play-pause",
   "bar.network.label": false,
-  "menus.clock.weather.enabled": false
+  "menus.clock.weather.enabled": false,
+  "theme.bar.location": "top",
+  "bar.autoHide": "fullscreen",
+  "theme.bar.border.location": "none",
+  "bar.network.showWifiInfo": false,
+  "theme.osd.location": "right",
+  "theme.osd.active_monitor": true,
+  "menus.dashboard.stats.enabled": false,
+  "menus.dashboard.directories.enabled": false,
+  "menus.power.lowBatteryNotification": true,
+  "bar.media.format": "{artist: - }{title}",
+  "bar.media.middleClick": "playerctl next",
+  "wallpaper.pywal": false
 }
