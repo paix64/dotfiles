@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 
 if [ $# -eq 0 ]; then
 	echo "Usage: $0 --title | --arturl | --artist | --length | --album | --source"
@@ -68,9 +68,9 @@ case "$1" in
 --status)
 	status=$(playerctl status 2>/dev/null)
 	if [[ $status == "Playing" ]]; then
-		echo "󰎆"
+		echo ""
 	elif [[ $status == "Paused" ]]; then
-		echo "󱑽"
+		echo ""
 	else
 		echo ""
 	fi

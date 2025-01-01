@@ -36,4 +36,7 @@
     "scminput": false,
     "c": false
   },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
 }

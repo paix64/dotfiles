@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 
 # Get the current battery percentage
 battery_percentage=$(cat /sys/class/power_supply/BAT0/capacity)
@@ -24,4 +24,4 @@ if [ "$battery_status" = "Charging" ]; then
 fi
 
 # Output the battery percentage and icon
-echo "$battery_percentage% $battery_icon"
+echo "$battery_icon $battery_percentage%"
