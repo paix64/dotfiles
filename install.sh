@@ -192,7 +192,8 @@ setup_timeshift() {
     "date_format" : "%Y-%m-%d %H:%M:%S",
     "exclude" : [
       "+ /home/$USER/**",
-      "+ /root/**"
+      "- /root/**",
+      "- /home$USER/.var/**"
     ],
     "exclude-apps" : []
 }
