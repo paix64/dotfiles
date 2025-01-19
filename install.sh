@@ -15,8 +15,8 @@ if ! grep -q "arch" /etc/os-release; then
   exit 1
 fi
 
-if [ ! -d "$HOME/dotfiles" ]; then
-  echo -e "$BLUE::$ESC The directory $YELLOW$HOME/dotfiles$ESC$RED does not exist. $ESC"
+if [ ! -d "$HOME/Repositories/dotfiles" ]; then
+  echo -e "$BLUE::$ESC The directory $YELLOW$HOME/Repositories/dotfiles$ESC$RED does not exist. $ESC"
   exit 1
 fi
 
@@ -55,23 +55,45 @@ check_config_folders() {
   echo ":: Checking for existing folders"
   sleep .4
 
-  local CHECK_CONFIG_FOLDERS="kitty hypr fastfetch fish oh-my-posh rofi nvim"
-  local DATETIME=$(date '+%Y-%m-%d %H:%M:%S')
+  local CONFIG_FOLDER="$HOME/.config"
+  local BACKUP_FOLDER="$HOME/.backup"
+  local DATETIME=$(date '+%Y-%m-%d_%H-%M-%S')
   local EXISTING="NO"
 
-  mkdir -p "$HOME/.backup/$DATETIME/"
+  mkdir -p "$BACKUP_FOLDER/$DATETIME/"
 
-  for dir in $CHECK_CONFIG_FOLDERS; do
-    if [ -d "$HOME/.config/$dir" ]; then
+  for dir in $(ls ./config); do
+    if [ -d "$CONFIG_FOLDER/$dir" ]; then
       echo ":: Attention: directory $dir already exists in .config"
-      mv $HOME/.config/$dir "$HOME/.backup/$DATETIME/"
+      mv "$CONFIG_FOLDER/$dir" "$BACKUP_FOLDER/$DATETIME/"
       EXISTING="YES"
     fi
   done
 
   if [[ $EXISTING == "YES" ]]; then
-    echo ":: Old config folder(s) backed up at ~/.backup folder"
+    echo ":: Old config folder(s) backed up at $BACKUP_FOLDER/$DATETIME"
   fi
+}
+
+link_config_folders() {
+  check_config_folders
+
+  echo ":: Creating links"
+  sleep .4
+
+  local CONFIG_FOLDER="$HOME/.config"
+  local DOTFILES_FOLDER="$HOME/Repositories/dotfiles/config"
+  local LOCAL_SHARE_FOLDER="$HOME/.local/share"
+
+  for dir in $(ls ./config); do
+    if [ -d "./config/$dir" ]; then
+      if [[ $dir == "localshare"* ]]; then
+        ln -s "$DOTFILES_FOLDER/localshare/zoxide" "$LOCAL_SHARE_FOLDER/"
+      else
+        ln -s "$DOTFILES_FOLDER/$dir" "$CONFIG_FOLDER/"
+      fi
+    fi
+  done
 }
 
 rate_mirrors() {
@@ -81,26 +103,6 @@ rate_mirrors() {
   rate-mirrors --save /tmp/mirrorlist arch
   sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
   sudo mv /tmp/mirrorlist /etc/pacman.d/mirrorlist
-}
-
-link_config_folders() {
-  check_config_folders
-
-  echo ":: Creating links"
-  sleep .4
-
-  ln -s $HOME/dotfiles/kitty $HOME/.config/
-  ln -s $HOME/dotfiles/ghostty $HOME/.config/
-  ln -s $HOME/dotfiles/hypr $HOME/.config/
-  ln -s $HOME/dotfiles/niri $HOME/.config/
-  ln -s $HOME/dotfiles/fish $HOME/.config/
-  ln -s $HOME/dotfiles/fastfetch $HOME/.config/
-  ln -s $HOME/dotfiles/oh-my-posh $HOME/.config/
-  ln -s $HOME/dotfiles/rofi $HOME/.config/
-  ln -s $HOME/dotfiles/wlogout $HOME/.config/
-  ln -s $HOME/dotfiles/localshare/zoxide $HOME/.local/share/
-  ln -s $HOME/dotfiles/wezterm $HOME/.config/
-  ln -s $HOME/dotfiles/Code/User $HOME/.config/Code/
 }
 
 setup_user_dirs() {
