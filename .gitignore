@@ -1,10 +1,10 @@
-micro/*
-!micro/bindings.json
-!micro/settings.json
+config/micro/*
+!config/micro/bindings.json
+!config/micro/settings.json
 
-fish/*
-!fish/config.fish
+config/fish/*
+!config/fish/config.fish
 
-Code/User/*
-!Code/User/keybindings.json
-!Code/User/settings.json
+config/Code/User/*
+!config/Code/User/keybindings.json
+!config/Code/User/settings.json

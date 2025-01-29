@@ -1,7 +1,7 @@
-theme = /home/burak/.cache/wal/colors-ghostty.conf
+theme = /home/pai/.cache/wal/colors-ghostty.conf
 #custom-shader = ./shaders/crt-shader.glsl
 
-window-decoration = false
+#window-decoration = false
 window-height = 20
 window-width = 70
 
