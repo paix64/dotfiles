@@ -56,14 +56,14 @@ def count_dependencies(package_file):
 
     # Print failed packages
     if failed_packages:
-        print("\nNot installed packages:")
+        print(f"\nNot installed packages ({len(failed_packages)}):")
         for package in failed_packages:
             print(f"- {package}")
 
     installed_packages = get_installed_packages()
     new_packages = [pkg for pkg in installed_packages if pkg not in packages]
     if new_packages:
-        print("\nNew packages installed:")
+        print(f"\nNew packages installed ({len(new_packages)}):")
         for package in new_packages:
             print(f"- {package}")
 
