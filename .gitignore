@@ -5,6 +5,6 @@ config/micro/*
 config/fish/*
 !config/fish/config.fish
 
-config/Code/User/*
+config/Code/*
 !config/Code/User/keybindings.json
 !config/Code/User/settings.json
