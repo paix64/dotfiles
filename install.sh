@@ -93,7 +93,8 @@ rate_mirrors() {
   echo ":: Rating mirrors"
   sleep .4
 
-  rate-mirrors --save /tmp/mirrorlist arch
+  rate-mirrors --entry-country NL --max-jumps 10 --country-neighbors-per-country 10 \
+         --country-test-mirrors-per-country 5 --top-mirrors-number-to-retest 10 --save /tmp/mirrorlist arch
   sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
   sudo mv /tmp/mirrorlist /etc/pacman.d/mirrorlist
 }
