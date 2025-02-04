@@ -44,13 +44,6 @@ install_packages() {
   yay -S --needed - <packages.conf
 }
 
-setup_sensors() {
-  echo ":: Setting up sensors"
-  sleep .4
-
-  sudo sensors-detect --auto >/dev/null
-}
-
 check_config_folders() {
   echo ":: Checking for existing folders"
   sleep .4
@@ -105,13 +98,6 @@ rate_mirrors() {
   sudo mv /tmp/mirrorlist /etc/pacman.d/mirrorlist
 }
 
-setup_user_dirs() {
-  echo ":: Creating user directories"
-  sleep .4
-
-  xdg-user-dirs-update
-}
-
 setup_virtual_network(){
   echo ":: Setting up virtual network"
   sleep .4
@@ -162,46 +148,6 @@ setup_electron() {
   ln -s ~/.config/electron-flags.conf ~/.config/code-flags.conf
 }
 
-setup_timeshift() {
-  echo ":: Setting up timeshift"
-  sleep .4
-
-  systemctl enable --now cronie
-
-  local ROOT=$(findmnt -no UUID /)
-
-  sudo tee /etc/timeshift/timeshift.json >/dev/null <<EOF
-{
-    "backup_device_uuid" : "$ROOT",
-    "parent_device_uuid" : "",
-    "do_first_run" : "false",
-    "btrfs_mode" : "false",
-    "include_btrfs_home_for_backup" : "false",
-    "include_btrfs_home_for_restore" : "false",
-    "stop_cron_emails" : "true",
-    "schedule_monthly" : "false",
-    "schedule_weekly" : "false",
-    "schedule_daily" : "true",
-    "schedule_hourly" : "false",
-    "schedule_boot" : "true",
-    "count_monthly" : "0",
-    "count_weekly" : "0",
-    "count_daily" : "3",
-    "count_hourly" : "0",
-    "count_boot" : "2",
-    "snapshot_size" : "",
-    "snapshot_count" : "",
-    "date_format" : "%Y-%m-%d %H:%M:%S",
-    "exclude" : [
-      "+ /home/$USER/**",
-      "- /root/**",
-      "- /home$USER/.var/**"
-    ],
-    "exclude-apps" : []
-}
-EOF
-}
-
 setup_rust() {
   echo ":: Setting up rust"
   sleep .4
@@ -212,37 +158,15 @@ setup_rust() {
 install_theme() {
   echo ":: Installing themes"
   sleep .4
-
-  git clone https://github.com/vinceliuice/Graphite-gtk-theme.git \
-  /tmp/Graphite
-  /tmp/Graphite/install.sh -c dark --tweaks normal black -l
   
-  color_scheme="prefer-dark"
-  gtk_theme="Graphite-Dark"
   icon_theme="Papirus-Dark"
   cursor_theme="Bibata-Modern-Ice"
   cursor_size=32
   
-  gsettings set org.gnome.desktop.interface color-scheme $color_scheme >/dev/null 2>&1 &
-  gsettings set org.gnome.desktop.interface gtk-theme $gtk_theme >/dev/null 2>&1 &
   gsettings set org.gnome.desktop.interface icon-theme $icon_theme >/dev/null 2>&1 &
   gsettings set org.gnome.desktop.interface cursor-theme $cursor_theme >/dev/null 2>&1 &
   gsettings set org.gnome.desktop.interface cursor-size $cursor_size
   gsettings set org.gnome.desktop.interface font-name "Google Sans Medium 14" >/dev/null 2>&1 &
-}
-
-setup_nemo() {
-  echo ":: Setting up nemo"
-  sleep .4
-
-  gsettings set org.cinnamon.desktop.default-applications.terminal exec kitty
-}
-
-setup_asusctl() {
-  echo ":: Setting up asusctl"
-  sleep .4
-
-  asusctl -c 80
 }
 
 setup_pacman() {
@@ -268,58 +192,8 @@ setup_pacman() {
   OPTIONS=(strip docs !libtool !staticlibs emptydirs zipman purge !debug lto)/' "$makepkg_config_file"
 }
 
-debloat_archinstall() {
-  echo ":: Debloating archinstall"
-  sudo pacman -Rns \
-    dunst dolphin wofi polkit-kde-agent \
-    xorg-xinit htop smartmontools \
-    wireless_tools
-
-  sudo pacman -S --dbonly --asdeps \
-    qt6-wayland qt5-wayland \
-    grim slurp xorg-server libpulse xdg-utils
-}
-
-setup_services() {
-  echo ":: Setting up services"
-  sleep .4
-
-  sudo systemctl enable --now bluetooth.service
-  sudo systemctl enable --now NetworkManager.service
-}
-
-install_gnome() {
-  sudo pacman -Syu
-  sudo pacman -S --noconfirm --needed gnome
-  sudo pacman -S --dbonly --asdeps \
-    tecla gnome-color-manager gnome-keyring \
-    gst-plugin-pipewire grilo-plugins \
-    gnome-settings-daemon
-  sudo pacman -Rns \
-    gnome-tour gnome-maps gnome-weather \
-    gnome-font-viewer gnome-remote-desktop \
-    simple-scan totem orca gnome-user-docs \
-    yelp gnome-logs epiphany gnome-contacts \
-    gnome-menus malcontent rygel gnome-connections \
-    gnome-user-share
-  cd /usr/share/wayland-sessions  
-  sudo rm -f gnome-classic-wayland.desktop \
-      gnome-classic.desktop gnome-wayland.desktop
-  cd /usr/share/xsessions
-  sudo rm -f gnome-classic-xorg.desktop \
-      gnome-classic.desktop gnome-xorg.desktop \
-      gnome.desktop
-}
-
 setup_hotspot() {
   systemctl enable create_ap
-}
-
-setup_autologin() {
-  sudo mkdir -p /etc/sddm.conf.d
-  sudo echo -e "[Autologin]\nUser=$USER\nSession=hyprland" \
-    > /tmp/autologin.conf
-  sudo cp /tmp/autologin.conf /etc/sddm.conf.d/
 }
 
 backup_flatpak() {
@@ -329,50 +203,22 @@ backup_flatpak() {
   flatpak list --app --columns=application >flatpaks.conf
 }
 
-finalize() {
-  echo ":: Finishing installation"
-  sleep .4
+if [[ "$1" == "" ]]; then
+  echo -e "
+options:\n  --pacman	setup pacman 
+  --rate	rate mirrors
+  --link	link dotfiles
+  --yay		install yay
+  --flatpak	save flatpaks"
 
-  hyprctl reload
-  ags --init
-}
-
-if [[ "$1" == "--install" ]]; then
-  debloat_archinstall
-  setup_pacman
-  
-  install_yay
-  rate_mirrors
-  install_packages
-  install_theme
-  
-  link_config_folders
-
-  setup_sensors
-  setup_user_dirs
-  setup_asusctl
-  setup_rust
-  setup_nemo
-  setup_timeshift
-  setup_fish
-  setup_power_key
-  setup_firewall
-  setup_bun
-  setup_electron
-  setup_services
-  setup_virtual_network
-  setup_hotspot
-  
-  finalize
-  
+elif [[ "$1" == "--pacman" ]]; then
+  setup_pacman  
 elif [[ "$1" == "--rate" ]]; then
   rate_mirrors
 elif [[ "$1" == "--link" ]]; then
   link_config_folders
 elif [[ "$1" == "--yay" ]]; then
   install_yay
-elif [[ "$1" == "--autologin" ]]; then
-  setup_autologin
 elif [[ "$1" == "--flatpak" ]]; then
   backup_flatpak  
 fi
