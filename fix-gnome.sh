@@ -1,38 +1,53 @@
 #!/usr/bin/env bash
-  
-  echo ":: Installing packages"
-  sleep .4
-  paru -S --needed gnome-themes-extra gtk-engine-murrine sassc \
-        bibata-cursor-theme-bin papirus-icon-theme ttf-google-sans
-  
-  echo ":: Installing Graphite theme"
-  sleep .4
-  git clone https://github.com/vinceliuice/Graphite-gtk-theme.git \
-  /tmp/Graphite
-  sudo sh /tmp/Graphite/install.sh --gdm --color dark --tweaks normal darker -l
-  
-  color_scheme="prefer-dark"
-  gtk_theme="Graphite-Dark"
-  icon_theme="Papirus-Dark"
-  cursor_theme="Bibata-Modern-Ice"
-  font_name="Google Sans Medium 12"
-  cursor_size=32
-  
-  echo ":: Applying themes"
-  sleep .4
-  gsettings set org.gnome.desktop.interface color-scheme $color_scheme
-  gsettings set org.gnome.desktop.interface gtk-theme $gtk_theme
-  gsettings set org.gnome.desktop.interface icon-theme $icon_theme
-  gsettings set org.gnome.desktop.interface cursor-theme $cursor_theme
-  gsettings set org.gnome.desktop.interface cursor-size $cursor_size
-  gsettings set org.gnome.desktop.interface font-name $font_name
-  
   echo ":: Applying settings"
   sleep .4
+
+  gsettings set org.gnome.desktop.interface icon-theme 'Papirus'
+  gsettings set org.gnome.desktop.interface cursor-theme 'Bibata-Modern-Ice'
+  gsettings set org.gnome.desktop.interface cursor-size 32
+  gsettings set org.gnome.desktop.interface font-name 'Google Sans Display Medium 12'
+  gsettings set org.gnome.desktop.interface document-font-name 'Google Sans Medium 12'
+  gsettings set org.gnome.desktop.interface monospace-font-name 'JetBrainsMono Nerd Font Semi-Bold 10'
+
   gsettings set org.gtk.Settings.FileChooser show-hidden true
-  gsettings set org.gtk.Settings.FileChooser window-size '(1100,700)'
   gsettings set org.gnome.mutter center-new-windows true
   gsettings set org.gnome.mutter dynamic-workspaces false
-  gsettings set org.gnome.desktop.wm.preferences num-workspaces 5
+  gsettings set org.gnome.desktop.wm.preferences num-workspaces 4
   gsettings set org.gnome.desktop.wm.preferences resize-with-right-button true
-  gsettings set org.gnome.desktop.wm.preferences focus-mode 'mouse'
+  gsettings set org.gnome.desktop.wm.preferences focus-mode 'sloppy'
+  gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,close'
+
+  gsettings set org.gnome.desktop.wm.keybindings close "['<Super>Q']"
+  gsettings set org.gnome.desktop.wm.keybindings toggle-fullscreen "['<Super>F']"
+  gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-1 "['<Super>1']"
+  gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-2 "['<Super>2']"
+  gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-3 "['<Super>3']"
+  gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-4 "['<Super>4']"
+  
+  gsettings set org.gnome.desktop.interface accent-color 'red'
+  gsettings set org.gnome.desktop.interface clock-format '24h'
+  gsettings set org.gnome.desktop.interface clock-show-weekday true
+  gsettings set org.gnome.desktop.interface show-battery-percentage true
+
+  gsettings set org.gnome.desktop.peripherals.keyboard delay 120
+  gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 50
+  gsettings set org.gnome.desktop.peripherals.mouse speed 0.5
+  gsettings set org.gnome.desktop.peripherals.touchpad speed 0.62
+
+  gsettings set org.gnome.desktop.privacy remove-old-temp-files true
+  gsettings set org.gnome.desktop.wm.preferences audible-bell false
+  gsettings set org.gnome.mutter center-new-windows true
+  gsettings set org.gnome.mutter dynamic-workspaces false
+
+  gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
+  gsettings set org.gnome.settings-daemon.plugins.color night-light-last-coordinates (35.0, 35.0)
+  gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature 3200
+
+  gsettings set org.gnome.settings-daemon.plugins.media-keys home ['<Super>e']
+  gsettings set org.gnome.settings-daemon.plugins.media-keys www ['<Super>w']
+  gsettings set org.gnome.shell.keybindings show-screenshot-ui ['<Shift><Super>s']
+
+  gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'interactive'
+  gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
+  gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-timeout 300
+  gsettings set org.gnome.settings-daemon.plugins.power idle-brightness 10

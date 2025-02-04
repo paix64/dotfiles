@@ -155,20 +155,6 @@ setup_rust() {
   rustup default stable
 }
 
-install_theme() {
-  echo ":: Installing themes"
-  sleep .4
-  
-  icon_theme="Papirus-Dark"
-  cursor_theme="Bibata-Modern-Ice"
-  cursor_size=32
-  
-  gsettings set org.gnome.desktop.interface icon-theme $icon_theme >/dev/null 2>&1 &
-  gsettings set org.gnome.desktop.interface cursor-theme $cursor_theme >/dev/null 2>&1 &
-  gsettings set org.gnome.desktop.interface cursor-size $cursor_size
-  gsettings set org.gnome.desktop.interface font-name "Google Sans Medium 14" >/dev/null 2>&1 &
-}
-
 setup_pacman() {
   echo ":: Setting up pacman"
   sleep .4
