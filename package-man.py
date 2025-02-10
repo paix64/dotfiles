@@ -70,7 +70,7 @@ def count_dependencies(package_file):
 
 def main():
     parser = argparse.ArgumentParser(description="Arch Package Dependency Manager")
-    parser.add_argument("package", nargs="?", help="Package name to analyze")
+    parser.add_argument("packages", nargs="*", help="Package names to analyze")
     parser.add_argument(
         "-c",
         "--count",
@@ -82,10 +82,12 @@ def main():
 
     if args.count:
         count_dependencies(args.count)
-    elif args.package:
-        deps = get_dependencies(args.package)
-        print(f"Dependencies for {args.package}:")
-        for i, dep in enumerate(deps, 1):
+    elif args.packages:
+        unique_deps = set()
+        for package in args.packages:
+            deps = get_dependencies(package)
+            unique_deps.update(set(deps))
+        for i, dep in enumerate(unique_deps, 1):
             print(f"{i}. {dep}")
     else:
         parser.print_help()
