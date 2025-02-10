@@ -4,7 +4,6 @@
   "workbench.colorTheme": "Gruvbox Dark Hard",
   "workbench.iconTheme": "material-icon-theme",
   "files.autoSave": "afterDelay",
-  "nix.enableLanguageServer": true,
   "editor.formatOnSave": true,
   "git.confirmSync": false,
   "explorer.confirmDelete": false,
@@ -39,4 +38,9 @@
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[nix]": {
+    "editor.defaultFormatter": "brettm12345.nixfmt-vscode"
+  },
+  "redhat.telemetry.enabled": false,
+  "git.autofetch": true,
 }

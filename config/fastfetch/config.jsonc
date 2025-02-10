@@ -53,7 +53,7 @@
     {
       "type": "command",
       "shell": "/bin/bash",
-      "text": "/home/burak/dotfiles/scripts/battery_info.sh",
+      "text": "/home/pai/Repositories/dotfiles/scripts/battery_info.sh",
       "key": "power ",
       "keyColor": "green"
     },
