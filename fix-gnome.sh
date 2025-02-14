@@ -29,7 +29,7 @@
   gsettings set org.gnome.desktop.interface clock-show-weekday true
   gsettings set org.gnome.desktop.interface show-battery-percentage true
 
-  gsettings set org.gnome.desktop.peripherals.keyboard delay 120
+  gsettings set org.gnome.desktop.peripherals.keyboard delay 150
   gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 50
   gsettings set org.gnome.desktop.peripherals.mouse speed 0.5
   gsettings set org.gnome.desktop.peripherals.touchpad speed 0.62
