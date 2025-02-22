@@ -2,8 +2,8 @@
 #custom-shader = ./shaders/crt-shader.glsl
 
 #window-decoration = false
-window-height = 20
-window-width = 70
+window-height = 22
+window-width = 80
 
 window-padding-x = 10
 window-padding-y = 0
