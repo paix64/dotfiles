@@ -1,7 +1,7 @@
 {
   "editor.fontFamily": "'JetBrainsMono Nerd Font', 'monospace'",
   "window.zoomLevel": 2,
-  "workbench.colorTheme": "Gruvbox Dark Hard",
+  "workbench.colorTheme": "Gruvbox Light Soft",
   "workbench.iconTheme": "material-icon-theme",
   "files.autoSave": "afterDelay",
   "editor.formatOnSave": true,
