@@ -15,10 +15,10 @@ window-inherit-working-directory = true
 shell-integration = fish
 bold-is-bright = false
 
-background = #090909
 background-opacity = .75
 background-blur-radius = 20
 
+theme = dark:GruvboxDarkHard,light:GruvboxLightHard
 font-family = "Jetbrains Mono Nerd Font"
 font-size = 16
 font-style = SemiBold
