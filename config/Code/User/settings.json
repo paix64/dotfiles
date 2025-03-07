@@ -2,7 +2,6 @@
   "editor.fontFamily": "'JetBrainsMono Nerd Font', 'monospace'",
   "window.zoomLevel": 2,
   "workbench.colorTheme": "Gruvbox Light Soft",
-  "workbench.iconTheme": "material-icon-theme",
   "files.autoSave": "afterDelay",
   "editor.formatOnSave": true,
   "git.confirmSync": false,
@@ -43,4 +42,8 @@
   },
   "redhat.telemetry.enabled": false,
   "git.autofetch": true,
+  "window.autoDetectColorScheme": true,
+  "workbench.preferredDarkColorTheme": "Gruvbox Dark Hard",
+  "workbench.preferredLightColorTheme": "Gruvbox Light Medium",
+  "workbench.iconTheme": "material-icon-theme",
 }
