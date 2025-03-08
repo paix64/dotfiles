@@ -114,6 +114,15 @@ setup_fish() {
   chsh -s $(which fish)
 }
 
+setup_asusctl() {
+  echo ":: Setting up asusctl"
+  sleep .4
+
+  asusctl -c 60
+  sudo sed -i 's/platform_profile_on_ac: Performance/platform_profile_on_ac: Balanced/g' \
+  /etc/asusd/asusd.ron
+}
+
 setup_power_key() {
   echo ":: Setting up power key"
   sleep .4
@@ -199,7 +208,9 @@ options:\n  --pacman	setup pacman
   --flatpak	save flatpaks"
 
 elif [[ "$1" == "--pacman" ]]; then
-  setup_pacman  
+  setup_pacman
+elif [[ "$1" == "--asus" ]]; then
+  setup_asusctl
 elif [[ "$1" == "--rate" ]]; then
   rate_mirrors
 elif [[ "$1" == "--link" ]]; then
