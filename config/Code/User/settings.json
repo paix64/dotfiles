@@ -46,4 +46,5 @@
   "workbench.preferredDarkColorTheme": "Gruvbox Dark Hard",
   "workbench.preferredLightColorTheme": "Gruvbox Light Medium",
   "workbench.iconTheme": "material-icon-theme",
+  "security.workspace.trust.enabled": false,
 }

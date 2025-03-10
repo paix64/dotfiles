@@ -53,3 +53,6 @@ fzf --fish | source
 oh-my-posh init fish -c ~/.config/oh-my-posh/zen.toml | source
 
 set fish_greeting ""
+
+# Created by `pipx` on 2025-03-09 14:19:49
+set PATH $PATH /home/pai/.local/bin
