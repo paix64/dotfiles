@@ -5,8 +5,8 @@
   gsettings set org.gnome.desktop.interface icon-theme 'Papirus'
   gsettings set org.gnome.desktop.interface cursor-theme 'Bibata-Modern-Ice'
   gsettings set org.gnome.desktop.interface cursor-size 32
-  gsettings set org.gnome.desktop.interface font-name 'Google Sans Display Medium 12'
-  gsettings set org.gnome.desktop.interface document-font-name 'Google Sans Medium 12'
+  gsettings set org.gnome.desktop.interface font-name 'Adwaita Sans Medium 12'
+  gsettings set org.gnome.desktop.interface document-font-name 'Adwaita Sans Medium 12'
   gsettings set org.gnome.desktop.interface monospace-font-name 'JetBrainsMono Nerd Font Semi-Bold 10'
 
   gsettings set org.gtk.Settings.FileChooser show-hidden true
