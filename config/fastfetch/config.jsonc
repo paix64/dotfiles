@@ -34,10 +34,9 @@
     },
     {
       "type": "cpu",
-      "format": "Intel i7-12700H @ {7} {8}",
+      "format": "Intel i7-12700H @ {7}",
       "key": "cpu ",
       "keyColor": "red",
-      "temp": true
     },
     {
       "type": "memory",
