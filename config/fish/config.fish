@@ -2,7 +2,7 @@ if status is-interactive
     fastfetch
 end
 
-set EDITOR /usr/bin/micro
+set EDITOR gnome-text-editor
 
 alias ls="exa --color=auto --hyperlink --icons=auto"
 alias şs="ls"
@@ -37,6 +37,7 @@ alias grep="rg"
 alias exe="chmod +x"
 alias py="python"
 alias del="gio trash"
+alias quiet="asusctl profile -P Quiet"
 
 # Set default apps
 xdg-mime default org.gnome.Nautilus.desktop inode/directory
