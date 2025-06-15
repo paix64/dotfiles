@@ -5,7 +5,6 @@ end
 set EDITOR gnome-text-editor
 
 alias ls="exa --color=auto --hyperlink --icons=auto"
-alias şs="ls"
 alias l="ls"
 alias la="ls -a"
 alias lal="ls -la"
