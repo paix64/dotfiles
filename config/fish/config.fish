@@ -38,19 +38,21 @@ alias py="python"
 alias del="gio trash"
 alias quiet="asusctl profile -P Quiet"
 
-# Set default apps
-xdg-mime default org.gnome.Nautilus.desktop inode/directory
-xdg-mime default zen-browser.desktop x-scheme-handler/https
-xdg-mime default org.gnome.TextEditor.desktop text/plain
-
 # Set up zoxide as cd
 zoxide init --cmd cd fish | source
 
 # Set up fzf key bindings
 fzf --fish | source
 
-# Set up oh-my-posh
-oh-my-posh init fish -c ~/.config/oh-my-posh/zen.toml | source
+# Set up starship
+export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
+
+function starship_transient_prompt_func
+  starship module character
+end
+
+starship init fish | source
+enable_transience
 
 set fish_greeting ""
 
