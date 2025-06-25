@@ -2,7 +2,7 @@ if status is-interactive
     fastfetch
 end
 
-set EDITOR gnome-text-editor
+set EDITOR micro
 
 alias ls="exa --color=auto --hyperlink --icons=auto"
 alias l="ls"
@@ -30,6 +30,7 @@ alias gr="git restore"
 alias gcl="git clone"
 alias gch="git checkout"
 
+alias yay="paru"
 alias m="micro"
 alias cat="bat"
 alias grep="rg"
