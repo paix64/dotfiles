@@ -39,6 +39,10 @@ alias py="python"
 alias del="gio trash"
 alias quiet="asusctl profile -P Quiet"
 
+function mkcd
+  mkdir -p $argv[1] && cd $argv[1]
+end
+
 # Set up zoxide as cd
 zoxide init --cmd cd fish | source
 
