@@ -1,6 +1,7 @@
 if status is-interactive
     fastfetch
     alias rm="gio trash"
+    alias dua="dua interactive"
 end
 
 set EDITOR micro
@@ -37,7 +38,6 @@ alias cat="bat"
 alias grep="rg"
 alias exe="chmod +x"
 alias py="python"
-alias dua="dua interactive"
 alias quiet="asusctl profile -P LowPower"
 
 function mkcd
